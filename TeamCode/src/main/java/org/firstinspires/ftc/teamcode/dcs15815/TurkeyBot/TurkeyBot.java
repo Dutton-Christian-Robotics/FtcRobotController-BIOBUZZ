@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class TurkeyBot {
 	HardwareMap hwMap;
 	public DcMotor backLeft, frontLeft, frontRight, backRight;
-	private final double maxPower = 1.0;
+	private final double maxPower = 0.3;
 
 	TurkeyBot(HardwareMap hm) {
 		hwMap = hm;
@@ -16,14 +16,27 @@ public class TurkeyBot {
 		frontRight = hwMap.dcMotor.get("front_right_motor");
 		backRight = hwMap.dcMotor.get("back_right_motor");
 
-		setMotorDirection(DcMotorSimple.Direction.REVERSE, DcMotorSimple.Direction.REVERSE, DcMotorSimple.Direction.FORWARD, DcMotorSimple.Direction.FORWARD);
+		setMotorDirection(
+			   DcMotorSimple.Direction.REVERSE,
+			   DcMotorSimple.Direction.FORWARD,
+			   DcMotorSimple.Direction.FORWARD,
+			   DcMotorSimple.Direction.REVERSE);
+	}
+
+	public double clamp(double min, double value, double max) {
+		if (value < min) {
+			return min;
+		} else if (value > max) {
+			return max;
+		}
+		return value;
 	}
 
 	public void setPower(double bl, double fl, double fr, double br) {
-		backLeft.setPower(bl);
-		frontLeft.setPower(fl);
-		frontRight.setPower(fr);
-		backRight.setPower(br);
+		backLeft.setPower(clamp(-1 * maxPower, bl, maxPower));
+		frontLeft.setPower(clamp(-1 * maxPower, fl, maxPower));
+		frontRight.setPower(clamp(-1 * maxPower, fr, maxPower));
+		backRight.setPower(clamp(-1 * maxPower, br, maxPower));
 	}
 
 	public void setPower(double p) {
@@ -54,11 +67,11 @@ public class TurkeyBot {
 
 
 	public void drive(double forward, double rotate) {
-		double strafe = 0;
-		double backLeftPower = forward - strafe + rotate;
-		double frontLeftPower = forward + strafe + rotate;
-		double frontRightPower = forward - strafe - rotate;
-		double backRightPower = forward + strafe - rotate;
+
+		double backLeftPower = forward + rotate;
+		double frontLeftPower = forward + rotate;
+		double frontRightPower = forward - rotate;
+		double backRightPower = forward - rotate;
 
 		setProportionalPower(backLeftPower, frontLeftPower, frontRightPower, backRightPower);
 	}
