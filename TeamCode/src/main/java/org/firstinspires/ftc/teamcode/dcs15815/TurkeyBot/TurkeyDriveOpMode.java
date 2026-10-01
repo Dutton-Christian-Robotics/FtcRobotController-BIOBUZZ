@@ -13,9 +13,7 @@ public class TurkeyDriveOpMode extends LinearOpMode {
 		bot = new TurkeyBot(hardwareMap);
 		waitForStart();
 
-		while (opModeIsActive()) {
-			bot.drive(-1 * gamepad1.left_stick_y, gamepad1.right_stick_x);
-		}
+		// What should be put here?
 
 	}
 }
