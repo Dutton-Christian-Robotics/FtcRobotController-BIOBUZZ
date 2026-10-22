@@ -13,6 +13,8 @@ import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.Def
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderUtilities.DefenderPresets;
 
 public class BuzzBotConfiguration extends DefenderBotConfiguration {
+	public static String SAM_PUNCTUATION = "sam";
+
 
 	/* DRIVETRAIN -------------------------------------------------- */
 
