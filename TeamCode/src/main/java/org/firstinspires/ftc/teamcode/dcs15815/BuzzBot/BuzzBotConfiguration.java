@@ -14,6 +14,8 @@ import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderUtiliti
 
 public class BuzzBotConfiguration extends DefenderBotConfiguration {
 
+	public static String MMCR_PUNCTUATION = "octothorpe";
+
 	/* DRIVETRAIN -------------------------------------------------- */
 
 	public static String DRIVETRAIN_MOTOR_BACK_LEFT_NAME = "motor_back_left"; //

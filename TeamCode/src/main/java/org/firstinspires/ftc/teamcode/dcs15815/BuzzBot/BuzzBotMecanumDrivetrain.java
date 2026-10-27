@@ -25,16 +25,16 @@ public class BuzzBotMecanumDrivetrain extends DefenderBotDrivetrain {
 //		frontRight = hm.get(DcMotorEx.class, DecodeConfiguration.DRIVETRAIN_MOTOR_FRONT_RIGHT_NAME);
 //		backRight = hm.get(DcMotorEx.class, DecodeConfiguration.DRIVETRAIN_MOTOR_BACK_RIGHT_NAME);
 
-		backLeft = (DcMotorEx) hm.dcMotor.get(BuzzBotConfiguration.DRIVETRAIN_MOTOR_BACK_LEFT_NAME);
-		frontLeft = (DcMotorEx) hm.dcMotor.get(BuzzBotConfiguration.DRIVETRAIN_MOTOR_FRONT_LEFT_NAME);
-		frontRight = (DcMotorEx) hm.dcMotor.get(BuzzBotConfiguration.DRIVETRAIN_MOTOR_FRONT_RIGHT_NAME);
-		backRight = (DcMotorEx) hm.dcMotor.get(BuzzBotConfiguration.DRIVETRAIN_MOTOR_BACK_RIGHT_NAME);
+		backLeft = (DcMotorEx) hm.dcMotor.get("drivetrain_motor_back_left");
+		frontLeft = (DcMotorEx) hm.dcMotor.get("drivetrain_motor_front_left");
+		frontRight = (DcMotorEx) hm.dcMotor.get("drivetrain_motor_front_right");
+		backRight = (DcMotorEx) hm.dcMotor.get("drivetrain_motor_back_right");
 
 
-		backLeft.setDirection(BuzzBotConfiguration.DRIVETRAIN_MOTOR_BACK_LEFT_DIRECTION);
-		frontLeft.setDirection(BuzzBotConfiguration.DRIVETRAIN_MOTOR_FRONT_LEFT_DIRECTION);
-		frontRight.setDirection(BuzzBotConfiguration.DRIVETRAIN_MOTOR_FRONT_RIGHT_DIRECTION);
-		backRight.setDirection(BuzzBotConfiguration.DRIVETRAIN_MOTOR_BACK_RIGHT_DIRECTION);
+		backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+		frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+		frontRight.setDirection(DcMotorSimple.Direction.FORWARD);
+		backRight.setDirection(DcMotorSimple.Direction.FORWARD);
 
 //		frontLeft.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 //		frontRight.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
@@ -81,7 +81,7 @@ public class BuzzBotMecanumDrivetrain extends DefenderBotDrivetrain {
 	}
 
 	private void setProportionalPower(double bl, double fl, double fr, double br) {
-		setProportionalPower(bl, fl, fr, br, BuzzBotConfiguration.DRIVETRAIN_POWER_MAX_AUTONOMOUS);
+//		setProportionalPower(bl, fl, fr, br, BuzzBotConfiguration.DRIVETRAIN_POWER_MAX_AUTONOMOUS);
 	}
 
 	private void setProportionalPower(double bl, double fl, double fr, double br, double p) {
@@ -190,40 +190,40 @@ public class BuzzBotMecanumDrivetrain extends DefenderBotDrivetrain {
 		setPower(backLeftPower, frontLeftPower, frontRightPower, backRightPower);
 	}
 
-	public void driveByVelocity(double forward, double strafe, double rotate) {
-//	   setMotorDirection(DcMotorSimple.Direction.FORWARD, DcMotorSimple.Direction.FORWARD,
-//			 DcMotorSimple.Direction.REVERSE, DcMotorSimple.Direction.REVERSE);
-
-		backLeft.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-		frontLeft.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-		frontRight.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-		backRight.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-
-		double backLeftPower = forward - strafe + rotate;
-		double frontLeftPower = forward + strafe + rotate;
-		double frontRightPower = forward - strafe - rotate;
-		double backRightPower = forward + strafe - rotate;
-
-		double largest = 1;
-		largest = Math.max(largest, Math.abs(backLeftPower));
-		largest = Math.max(largest, Math.abs(frontLeftPower));
-		largest = Math.max(largest, Math.abs(frontRightPower));
-		largest = Math.max(largest, Math.abs(backRightPower));
-
-		double maxTicksSecond = BuzzBotConfiguration.DRIVETRAIN_MAX_TICKS_PER_SECOND;
-
-		backLeft.setVelocity(backLeftPower / largest * maxTicksSecond);
-		frontLeft.setVelocity(frontLeftPower / largest * maxTicksSecond);
-		frontRight.setVelocity(frontRightPower / largest * maxTicksSecond);
-		backRight.setVelocity(backRightPower / largest * maxTicksSecond);
-	}
-
-	public boolean frontLeftIsStalled() {
-//        return false;
-		return frontLeft.getVelocity() == 0;
-	}
-
-
+//	public void driveByVelocity(double forward, double strafe, double rotate) {
+////	   setMotorDirection(DcMotorSimple.Direction.FORWARD, DcMotorSimple.Direction.FORWARD,
+////			 DcMotorSimple.Direction.REVERSE, DcMotorSimple.Direction.REVERSE);
+//
+//		backLeft.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+//		frontLeft.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+//		frontRight.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+//		backRight.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+//
+//		double backLeftPower = forward - strafe + rotate;
+//		double frontLeftPower = forward + strafe + rotate;
+//		double frontRightPower = forward - strafe - rotate;
+//		double backRightPower = forward + strafe - rotate;
+//
+//		double largest = 1;
+//		largest = Math.max(largest, Math.abs(backLeftPower));
+//		largest = Math.max(largest, Math.abs(frontLeftPower));
+//		largest = Math.max(largest, Math.abs(frontRightPower));
+//		largest = Math.max(largest, Math.abs(backRightPower));
+//
+//		double maxTicksSecond = BuzzBotConfiguration.DRIVETRAIN_MAX_TICKS_PER_SECOND;
+//
+//		backLeft.setVelocity(backLeftPower / largest * maxTicksSecond);
+//		frontLeft.setVelocity(frontLeftPower / largest * maxTicksSecond);
+//		frontRight.setVelocity(frontRightPower / largest * maxTicksSecond);
+//		backRight.setVelocity(backRightPower / largest * maxTicksSecond);
+//	}
+//
+//	public boolean frontLeftIsStalled() {
+////        return false;
+//		return frontLeft.getVelocity() == 0;
+//	}
+//
+//
 
 
 }
