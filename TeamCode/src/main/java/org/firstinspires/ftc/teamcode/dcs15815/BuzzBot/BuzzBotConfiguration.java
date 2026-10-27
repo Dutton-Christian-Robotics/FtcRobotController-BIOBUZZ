@@ -12,22 +12,14 @@ import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.Def
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBotPosition;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderUtilities.DefenderPresets;
 
-public class BuzzBotConfiguration extends DefenderBotConfiguration {
-	public static String SAM_PUNCTUATION = "sam";
-
-
-	public static String ROYCE_PUNCTUATION = "interrobang";
-	//hi
-
-
-	public static String MMCR_PUNCTUATION = "octothorpe";
+public class BuzzBotConfiguration {
 
 	/* DRIVETRAIN -------------------------------------------------- */
 
-	public static String DRIVETRAIN_MOTOR_BACK_LEFT_NAME = "motor_back_left"; //
-	public static String DRIVETRAIN_MOTOR_FRONT_LEFT_NAME = "motor_front_left"; //
-	public static String DRIVETRAIN_MOTOR_FRONT_RIGHT_NAME = "motor_front_right"; //
-	public static String DRIVETRAIN_MOTOR_BACK_RIGHT_NAME = "motor_back_right"; //
+	public static String DRIVETRAIN_MOTOR_BACK_LEFT_NAME = "drivetrain_motor_back_left"; //
+	public static String DRIVETRAIN_MOTOR_FRONT_LEFT_NAME = "drivetrain_motor_front_left"; //
+	public static String DRIVETRAIN_MOTOR_FRONT_RIGHT_NAME = "drivetrain_motor_front_right"; //
+	public static String DRIVETRAIN_MOTOR_BACK_RIGHT_NAME = "drivetrain_motor_back_right"; //
 
 	public static DcMotorSimple.Direction DRIVETRAIN_MOTOR_BACK_LEFT_DIRECTION = DcMotorSimple.Direction.FORWARD;
 	public static DcMotorSimple.Direction DRIVETRAIN_MOTOR_FRONT_LEFT_DIRECTION = DcMotorSimple.Direction.FORWARD;
@@ -38,12 +30,12 @@ public class BuzzBotConfiguration extends DefenderBotConfiguration {
 	public static int DRIVETRAIN_MAX_TICKS_PER_SECOND = 2800;
 
 
-	/* SYSTEM 1 ---------------------------------------------------------- */
+	/* INTAKE ---------------------------------------------------------- */
 
 
-	/* SYSTEM 2 ---------------------------------------------------------- */
+	/* PROBOSCIS ---------------------------------------------------------- */
 
-	/* SYSTEM 3 ---------------------------------------------------------- */
+	/* SHOOTER ---------------------------------------------------------- */
 
 	/* GAMEPADS -------------------------------------------------------- */
 

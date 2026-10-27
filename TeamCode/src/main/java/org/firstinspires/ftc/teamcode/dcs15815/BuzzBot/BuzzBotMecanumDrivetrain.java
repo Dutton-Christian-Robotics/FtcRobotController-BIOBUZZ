@@ -8,7 +8,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBot;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBotDrivetrain;
 
-
 public class BuzzBotMecanumDrivetrain extends DefenderBotDrivetrain {
 
 	public DcMotorEx backLeft, frontLeft, frontRight, backRight;
@@ -20,15 +19,11 @@ public class BuzzBotMecanumDrivetrain extends DefenderBotDrivetrain {
 	public BuzzBotMecanumDrivetrain(HardwareMap hm, DefenderBot b) {
 		super(hm, b);
 
-//		backLeft = hm.get(DcMotorEx.class, DecodeConfiguration.DRIVETRAIN_MOTOR_BACK_LEFT_NAME);
-//		frontLeft = hm.get(DcMotorEx.class, DecodeConfiguration.DRIVETRAIN_MOTOR_FRONT_LEFT_NAME);
-//		frontRight = hm.get(DcMotorEx.class, DecodeConfiguration.DRIVETRAIN_MOTOR_FRONT_RIGHT_NAME);
-//		backRight = hm.get(DcMotorEx.class, DecodeConfiguration.DRIVETRAIN_MOTOR_BACK_RIGHT_NAME);
+		backLeft = hm.get(DcMotorEx.class, BuzzBotConfiguration.DRIVETRAIN_MOTOR_BACK_LEFT_NAME);
+		frontLeft = hm.get(DcMotorEx.class, BuzzBotConfiguration.DRIVETRAIN_MOTOR_FRONT_LEFT_NAME);
+		frontRight = hm.get(DcMotorEx.class, BuzzBotConfiguration.DRIVETRAIN_MOTOR_FRONT_RIGHT_NAME);
+		backRight = hm.get(DcMotorEx.class, BuzzBotConfiguration.DRIVETRAIN_MOTOR_BACK_RIGHT_NAME);
 
-		backLeft = (DcMotorEx) hm.dcMotor.get("drivetrain_motor_back_left");
-		frontLeft = (DcMotorEx) hm.dcMotor.get("drivetrain_motor_front_left");
-		frontRight = (DcMotorEx) hm.dcMotor.get("drivetrain_motor_front_right");
-		backRight = (DcMotorEx) hm.dcMotor.get("drivetrain_motor_back_right");
 
 
 		backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -87,7 +82,7 @@ public class BuzzBotMecanumDrivetrain extends DefenderBotDrivetrain {
 	private void setProportionalPower(double bl, double fl, double fr, double br, double p) {
 
 		// I think the way this is supposed to work is not scaling based on the largest,
-		// but instead off of the front left value—which should be he max value
+		// but instead of the front left value—which should be he max value
 
 		bl *= p;
 		fl *= p;
@@ -190,40 +185,40 @@ public class BuzzBotMecanumDrivetrain extends DefenderBotDrivetrain {
 		setPower(backLeftPower, frontLeftPower, frontRightPower, backRightPower);
 	}
 
-//	public void driveByVelocity(double forward, double strafe, double rotate) {
-////	   setMotorDirection(DcMotorSimple.Direction.FORWARD, DcMotorSimple.Direction.FORWARD,
-////			 DcMotorSimple.Direction.REVERSE, DcMotorSimple.Direction.REVERSE);
-//
-//		backLeft.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-//		frontLeft.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-//		frontRight.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-//		backRight.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-//
-//		double backLeftPower = forward - strafe + rotate;
-//		double frontLeftPower = forward + strafe + rotate;
-//		double frontRightPower = forward - strafe - rotate;
-//		double backRightPower = forward + strafe - rotate;
-//
-//		double largest = 1;
-//		largest = Math.max(largest, Math.abs(backLeftPower));
-//		largest = Math.max(largest, Math.abs(frontLeftPower));
-//		largest = Math.max(largest, Math.abs(frontRightPower));
-//		largest = Math.max(largest, Math.abs(backRightPower));
-//
-//		double maxTicksSecond = BuzzBotConfiguration.DRIVETRAIN_MAX_TICKS_PER_SECOND;
-//
-//		backLeft.setVelocity(backLeftPower / largest * maxTicksSecond);
-//		frontLeft.setVelocity(frontLeftPower / largest * maxTicksSecond);
-//		frontRight.setVelocity(frontRightPower / largest * maxTicksSecond);
-//		backRight.setVelocity(backRightPower / largest * maxTicksSecond);
-//	}
-//
-//	public boolean frontLeftIsStalled() {
-////        return false;
-//		return frontLeft.getVelocity() == 0;
-//	}
-//
-//
+	public void driveByVelocity(double forward, double strafe, double rotate) {
+//	   setMotorDirection(DcMotorSimple.Direction.FORWARD, DcMotorSimple.Direction.FORWARD,
+//			 DcMotorSimple.Direction.REVERSE, DcMotorSimple.Direction.REVERSE);
+
+		backLeft.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+		frontLeft.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+		frontRight.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+		backRight.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+
+		double backLeftPower = forward - strafe + rotate;
+		double frontLeftPower = forward + strafe + rotate;
+		double frontRightPower = forward - strafe - rotate;
+		double backRightPower = forward + strafe - rotate;
+
+		double largest = 1;
+		largest = Math.max(largest, Math.abs(backLeftPower));
+		largest = Math.max(largest, Math.abs(frontLeftPower));
+		largest = Math.max(largest, Math.abs(frontRightPower));
+		largest = Math.max(largest, Math.abs(backRightPower));
+
+		double maxTicksSecond = BuzzBotConfiguration.DRIVETRAIN_MAX_TICKS_PER_SECOND;
+
+		backLeft.setVelocity(backLeftPower / largest * maxTicksSecond);
+		frontLeft.setVelocity(frontLeftPower / largest * maxTicksSecond);
+		frontRight.setVelocity(frontRightPower / largest * maxTicksSecond);
+		backRight.setVelocity(backRightPower / largest * maxTicksSecond);
+	}
+
+	public boolean frontLeftIsStalled() {
+//        return false;
+		return frontLeft.getVelocity() == 0;
+	}
+
+
 
 
 }
