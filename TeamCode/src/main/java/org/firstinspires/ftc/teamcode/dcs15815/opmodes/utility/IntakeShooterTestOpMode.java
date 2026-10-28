@@ -2,9 +2,10 @@ package org.firstinspires.ftc.teamcode.dcs15815.opmodes.utility;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.Utility;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@TeleOp(name = "Intake and Shooter Test", group="")
+@Utility(name = "Intake and Shooter Test", description="")
 public class IntakeShooterTestOpMode extends LinearOpMode {
 	DcMotor intakeMotor;
 	DcMotor shooterLiftMotor;
@@ -22,8 +23,8 @@ public class IntakeShooterTestOpMode extends LinearOpMode {
 
 		intakeMotor.setDirection(DcMotor.Direction.FORWARD);
 		shooterLiftMotor.setDirection(DcMotor.Direction.REVERSE);
-		shooterMotorLeft.setDirection(DcMotor.Direction.REVERSE);
-		shooterMotorRight.setDirection(DcMotor.Direction.FORWARD);
+		shooterMotorLeft.setDirection(DcMotor.Direction.FORWARD);
+		shooterMotorRight.setDirection(DcMotor.Direction.REVERSE);
 
 		double power = 0;
 		waitForStart();
