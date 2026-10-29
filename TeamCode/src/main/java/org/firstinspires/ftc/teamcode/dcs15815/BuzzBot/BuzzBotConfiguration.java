@@ -34,8 +34,9 @@ public class BuzzBotConfiguration {
 
 
 	/* INTAKE ---------------------------------------------------------- */
-
-
+public static String INTAKE_MOTOR_NAME = "intake_motor";
+public static DcMotorSimple.Direction INTAKE_MOTOR_DIRECTION = DcMotorSimple.Direction.FORWARD;
+public static double INTAKE_MOTOR_POWER_MAX = 1;
 	/* PROBOSCIS ---------------------------------------------------------- */
 
 	/* SHOOTER ---------------------------------------------------------- */
