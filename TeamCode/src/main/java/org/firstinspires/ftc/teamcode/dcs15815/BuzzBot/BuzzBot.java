@@ -17,12 +17,13 @@ public class BuzzBot extends DefenderBot {
 
 	private boolean useDebugging = false;
 	public BooleanSupplier abortOpMode = () -> false;
+	BuzzBotMecanumDrivetrain drivetrain;
 
 
 	public BuzzBot(HardwareMap hm, Class configClass, Telemetry t) {
 		super(hm, configClass, t);
 
-//		drivetrain = addSystem(new DecodeMecanumDrivetrain(hm, this));
+		drivetrain = addSystem(new BuzzBotMecanumDrivetrain(hm, this));
 
 //		navigation = addSystem(new DecodeNavigation(hm, this));
 

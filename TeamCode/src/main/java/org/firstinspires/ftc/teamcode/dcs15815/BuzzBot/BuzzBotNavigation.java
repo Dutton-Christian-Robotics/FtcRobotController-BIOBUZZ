@@ -1,0 +1,285 @@
+package org.firstinspires.ftc.teamcode.dcs15815.BuzzBot;
+
+import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
+import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBotConfiguration;
+import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBotMecanumDrivetrain;
+import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBot;
+import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBotPosition;
+import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBotSystem;
+import static org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit.MM;
+import static org.firstinspires.ftc.robotcore.external.navigation.AngleUnit.RADIANS;
+
+public class BuzzBotNavigation extends DefenderBotSystem {
+
+	public GoBildaPinpointDriver pinpoint;
+	BuzzBotMecanumDrivetrain drivetrain;
+
+	private enum Direction {
+		x,
+		y,
+		h
+	}
+
+	private enum InBounds {
+		NOT_IN_BOUNDS,
+		IN_X_Y,
+		IN_HEADING,
+		IN_BOUNDS
+	}
+
+	private static double xyTolerance = 8;
+	//    private static double yawTolerance = 0.0349066; // this is 2º
+	private static double yawTolerance = 0.0698131701; // 4º
+
+	private static double pGain = 0.008;
+	private static double dGain = 0.00001;
+	private static double accel = 10.0;
+
+	private static double yawPGain = 5.0;
+	private static double yawDGain = 0.0;
+	private static double yawAccel = 20.0;
+
+	private ElapsedTime holdTimer = new ElapsedTime();
+	private final ElapsedTime PIDTimer = new ElapsedTime();
+
+	private final PIDLoop xPID = new PIDLoop();
+	private final PIDLoop yPID = new PIDLoop();
+	private final PIDLoop hPID = new PIDLoop();
+
+	public double totalError = 0;
+
+	public boolean inBoundsX = false;
+	public boolean inBoundsY = false;
+	public boolean inBoundsH = false;
+
+	public boolean isAtTarget = false;
+
+
+	public BuzzBotNavigation(HardwareMap hm, DefenderBot b) {
+		super(hm, b);
+
+		drivetrain = ((BuzzBot) b).drivetrain;
+
+		pinpoint = hardwareMap.get(GoBildaPinpointDriver.class, BuzzBotConfiguration.NAVIGATION_PINPOINT_NAME);
+
+		pinpoint.setOffsets(BuzzBotConfiguration.NAVIGATION_PINPOINT_OFFSET_X, BuzzBotConfiguration.NAVIGATION_PINPOINT_OFFSET_Y, BuzzBotConfiguration.NAVIGATION_PINPOINT_OFFSET_DISTANCEUNIT);
+		pinpoint.setEncoderResolution(BuzzBotConfiguration.NAVIGATION_POD_TYPE);
+		pinpoint.setEncoderDirections(BuzzBotConfiguration.NAVIGATION_PINPOINT_ENCODERDIRECTION_X, BuzzBotConfiguration.NAVIGATION_PINPOINT_ENCODERDIRECTION_Y);
+
+		pinpoint.resetPosAndIMU();
+	}
+
+	Pose2D currentPosition() {
+		return pinpoint.getPosition();
+	}
+
+	public void setXYCoefficients(double p, double d, double acceleration, DistanceUnit unit, double tolerance){
+		pGain = p;
+		dGain = d;
+		accel = acceleration;
+		xyTolerance = unit.toMm(tolerance);
+	}
+
+	public void setYawCoefficients(double p, double d, double acceleration, AngleUnit unit, double tolerance){
+		yawPGain = p;
+		yawDGain = d;
+		yawAccel = acceleration;
+		yawTolerance = unit.toRadians(tolerance);
+	}
+
+	public Pose2D getPosition() {
+		return pinpoint.getPosition();
+	}
+
+	public void setPosition(Pose2D p) {
+		pinpoint.setPosition(p);
+	}
+
+	public void setPosition(DefenderBotPosition p) {
+		setPosition(p.asPose2D());
+	}
+
+	public void setPosition(String n) {
+		try {
+			setPosition((DefenderBotPosition) BuzzBotConfiguration.class.getField(n).get(BuzzBotConfiguration.class));
+		} catch (Exception e) {
+			System.out.println("Could not find that position.");
+		}
+	}
+
+	public void setPosition(double x, double y, double h) {
+		setPosition(new DefenderBotPosition(x, y, h));
+	}
+
+	public boolean driveToFromCurrent(Pose2D targetPosition) {
+		return driveTo(pinpoint.getPosition(), targetPosition, BuzzBotConfiguration.DRIVETRAIN_POWER_MAX_AUTONOMOUS, 0);
+	}
+
+
+	public boolean driveToFromCurrent(Pose2D targetPosition, double holdTime) {
+		return driveTo(pinpoint.getPosition(), targetPosition, BuzzBotConfiguration.DRIVETRAIN_POWER_MAX_AUTONOMOUS, holdTime);
+	}
+
+	public boolean driveToFromCurrent(Pose2D targetPosition, double power, double holdTime) {
+		return driveTo(pinpoint.getPosition(), targetPosition, power, holdTime);
+	}
+
+	public boolean driveTo(Pose2D currentPosition, Pose2D targetPosition, double holdTime) {
+		return driveTo(currentPosition, targetPosition, BuzzBotConfiguration.DRIVETRAIN_POWER_MAX_AUTONOMOUS, holdTime);
+	}
+
+	public boolean driveTo(Pose2D currentPosition, Pose2D targetPosition, double power, double holdTime) {
+		boolean atTarget;
+
+		if (holdTimer == null) {
+			holdTimer = new ElapsedTime();
+		}
+
+		totalError = 0;
+		double xPWR = calculatePID(currentPosition, targetPosition, Direction.x);
+		double yPWR = calculatePID(currentPosition, targetPosition, Direction.y);
+		double hOutput = calculatePID(currentPosition, targetPosition, Direction.h);
+
+		double heading = currentPosition.getHeading(AngleUnit.RADIANS);
+		double cosine = Math.cos(heading);
+		double sine = Math.sin(heading);
+
+		double xOutput = -1 * ((xPWR * cosine) + (yPWR * sine));
+		double yOutput = -1 * ((xPWR * sine) - (yPWR * cosine));
+
+
+       /* ----------------------------------------------------------------------------------------
+		  X: + = forward, - = backward
+	       Y: + = left, - = right
+            H: + = ccw, - = cw
+         ---------------------------------------------------------------------------------------- */
+//        bot.telemetry.addData("x out", xOutput);
+//        bot.telemetry.addData("y out", yOutput);
+//        bot.telemetry.addData("h out", hOutput);
+//        bot.telemetry.addData("p", power);
+
+		if (!isAtTarget) {
+			drivetrain.driveWithPinpointValues(xOutput, yOutput, hOutput, power);
+		} else {
+			drivetrain.stopDriving();
+		}
+//        calculateMecanumOutput(xOutput * power, yOutput * power, hOutput * power);
+
+		if (inBounds(currentPosition, targetPosition) == InBounds.IN_BOUNDS) {
+			atTarget = true;
+			isAtTarget = true;
+//            drivetrain.drivingTimer = null;
+		} else {
+			holdTimer.reset();
+			atTarget = false;
+		}
+
+		if (atTarget && holdTimer.time() > holdTime) {
+			drivetrain.stopDriving();
+			isAtTarget = false;
+			drivetrain.deactivateTimer();
+			return true;
+		}
+		return false;
+	}
+
+	private double calculatePID(Pose2D currentPosition, Pose2D targetPosition, Direction direction){
+		if (direction == Direction.x){
+			double xError = targetPosition.getX(MM) - currentPosition.getX(MM);
+			totalError += xError;
+			return xPID.calculateAxisPID(xError, pGain, dGain, accel,PIDTimer.seconds());
+		}
+		if (direction == Direction.y){
+			double yError = targetPosition.getY(MM) - currentPosition.getY(MM);
+			totalError += yError;
+			return yPID.calculateAxisPID(yError, pGain, dGain, accel, PIDTimer.seconds());
+		}
+		if (direction == Direction.h){
+			double hError = targetPosition.getHeading(AngleUnit.RADIANS) - currentPosition.getHeading(AngleUnit.RADIANS);
+			totalError += hError;
+			return hPID.calculateAxisPID(hError, yawPGain, yawDGain, yawAccel, PIDTimer.seconds());
+		}
+		return 0;
+	}
+
+	private InBounds inBounds(Pose2D currPose, Pose2D trgtPose) {
+		boolean xInBounds = currPose.getX(MM) > (trgtPose.getX(MM) - xyTolerance) && currPose.getX(MM) < (trgtPose.getX(MM) + xyTolerance);
+		boolean yInBounds = currPose.getY(MM) > (trgtPose.getY(MM) - xyTolerance) && currPose.getY(MM) < (trgtPose.getY(MM) + xyTolerance);
+		boolean hInBounds = currPose.getHeading(RADIANS) > (trgtPose.getHeading(RADIANS) - yawTolerance) &&
+			   currPose.getHeading(RADIANS) < (trgtPose.getHeading(RADIANS) + yawTolerance);
+
+		inBoundsX = xInBounds;
+		inBoundsY = yInBounds;
+		inBoundsH = hInBounds;
+
+		if (xInBounds && yInBounds && hInBounds) {
+			return InBounds.IN_BOUNDS;
+		} else if (xInBounds && yInBounds) {
+			return InBounds.IN_X_Y;
+		} else if (hInBounds) {
+			return InBounds.IN_HEADING;
+		} else
+			return InBounds.NOT_IN_BOUNDS;
+	}
+
+	public double calculateTargetHeading(Pose2D currPose, Pose2D trgtPose) {
+		double xDelta = trgtPose.getX(MM) - currPose.getX(MM);
+		double yDelta = trgtPose.getY(MM) - currPose.getY(MM);
+
+		if(Math.abs(xDelta) > xyTolerance || Math.abs(yDelta) > xyTolerance){
+			return Math.atan2(yDelta, xDelta);
+		} else {
+			return currPose.getHeading(RADIANS);
+		}
+
+	}
+
+	public void updatePosition() {
+		pinpoint.update();
+	}
+
+
+
+}
+
+class PIDLoop{
+	private double previousError;
+	private double previousTime;
+	private double previousOutput;
+
+	private double errorR;
+
+	public double calculateAxisPID(double error, double pGain, double dGain, double accel, double currentTime){
+		double p = error * pGain;
+		double cycleTime = currentTime - previousTime;
+		double d = dGain * (previousError - error) / (cycleTime);
+		double output = p + d;
+		double dV = cycleTime * accel;
+
+		double max = Math.abs(output);
+		if(max > 1.0){
+			output /= max;
+		}
+
+		if((output - previousOutput) > dV){
+			output = previousOutput + dV;
+		} else if ((output - previousOutput) < -dV){
+			output = previousOutput - dV;
+		}
+
+		previousOutput = output;
+		previousError  = error;
+		previousTime   = currentTime;
+
+		errorR = error;
+
+		return output;
+	}
+
+}

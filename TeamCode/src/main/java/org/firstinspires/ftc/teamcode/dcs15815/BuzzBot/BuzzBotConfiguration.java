@@ -12,17 +12,17 @@ import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.Def
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBotPosition;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderUtilities.DefenderPresets;
 
-public class BuzzBotConfiguration extends DefenderBotConfiguration {
+public class BuzzBotConfiguration {
 
 	public static String colin_punction = "octothorpe";
 
 
 	/* DRIVETRAIN -------------------------------------------------- */
 
-	public static String DRIVETRAIN_MOTOR_BACK_LEFT_NAME = "motor_back_left"; //
-	public static String DRIVETRAIN_MOTOR_FRONT_LEFT_NAME = "motor_front_left"; //
-	public static String DRIVETRAIN_MOTOR_FRONT_RIGHT_NAME = "motor_front_right"; //
-	public static String DRIVETRAIN_MOTOR_BACK_RIGHT_NAME = "motor_back_right"; //
+	public static String DRIVETRAIN_MOTOR_BACK_LEFT_NAME = "drivetrain_motor_back_left"; //
+	public static String DRIVETRAIN_MOTOR_FRONT_LEFT_NAME = "drivetrain_motor_front_left"; //
+	public static String DRIVETRAIN_MOTOR_FRONT_RIGHT_NAME = "drivetrain_motor_front_right"; //
+	public static String DRIVETRAIN_MOTOR_BACK_RIGHT_NAME = "drivetrain_motor_back_right"; //
 
 	public static DcMotorSimple.Direction DRIVETRAIN_MOTOR_BACK_LEFT_DIRECTION = DcMotorSimple.Direction.FORWARD;
 	public static DcMotorSimple.Direction DRIVETRAIN_MOTOR_FRONT_LEFT_DIRECTION = DcMotorSimple.Direction.FORWARD;
@@ -33,12 +33,25 @@ public class BuzzBotConfiguration extends DefenderBotConfiguration {
 	public static int DRIVETRAIN_MAX_TICKS_PER_SECOND = 2800;
 
 
-	/* SYSTEM 1 ---------------------------------------------------------- */
+	/* INTAKE ---------------------------------------------------------- */
 
 
-	/* SYSTEM 2 ---------------------------------------------------------- */
+	/* PROBOSCIS ---------------------------------------------------------- */
 
-	/* SYSTEM 3 ---------------------------------------------------------- */
+	/* SHOOTER ---------------------------------------------------------- */
+
+	public static double SHOOTER_MOTOR_POWER_START = 1;
+	public static String SHOOTER_MOTOR_LEFT_NAME = "shooter_motor_left";
+	public static String SHOOTER_MOTOR_RIGHT_NAME = "shooter_motor_right";
+	public static String SHOOTER_MOTOR_LIFT_NAME = "shooter_motor_lift";
+	public static DcMotorSimple.Direction SHOOTER_MOTOR_LEFT_DIRECTION = DcMotorSimple.Direction.REVERSE;
+	public static DcMotorSimple.Direction SHOOTER_MOTOR_RIGHT_DIRECTION = DcMotorSimple.Direction.FORWARD;
+	public static DcMotorSimple.Direction SHOOTER_MOTOR_LIFT_DIRECTION = DcMotorSimple.Direction.REVERSE;
+
+	public static double SHOOTER_MOTOR_VELOCITY_MAX = 2400;
+	public static double SHOOTER_MOTOR_POWER_MAX = 1;
+	public static double SHOOTER_MOTOR_LIFT_POWER_MAX = 1;
+	public static long SHOOTER_TIME_AFTER_MOTOR_START = 250;
 
 	/* GAMEPADS -------------------------------------------------------- */
 

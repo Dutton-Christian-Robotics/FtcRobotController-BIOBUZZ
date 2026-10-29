@@ -8,15 +8,15 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Utility(name = "Motor Test", description="")
+@TeleOp(name = "Motor Test", group="")
 public class MotorTestOpMode extends LinearOpMode {
 	DcMotor motor;
 
 	@Override
 	public void runOpMode() {
 
-		motor = hardwareMap.dcMotor.get("motor_big_wheel");
-		motor.setDirection(DcMotor.Direction.FORWARD);
+		motor = hardwareMap.dcMotor.get("shooter_motor_right");
+//		motor.setDirection(DcMotor.Direction.REVERSE);
 		double power = 0;
 
 		waitForStart();

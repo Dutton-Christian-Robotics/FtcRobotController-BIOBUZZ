@@ -8,7 +8,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBot;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBotDrivetrain;
 
-
 public class BuzzBotMecanumDrivetrain extends DefenderBotDrivetrain {
 
 	public DcMotorEx backLeft, frontLeft, frontRight, backRight;
@@ -20,21 +19,17 @@ public class BuzzBotMecanumDrivetrain extends DefenderBotDrivetrain {
 	public BuzzBotMecanumDrivetrain(HardwareMap hm, DefenderBot b) {
 		super(hm, b);
 
-//		backLeft = hm.get(DcMotorEx.class, DecodeConfiguration.DRIVETRAIN_MOTOR_BACK_LEFT_NAME);
-//		frontLeft = hm.get(DcMotorEx.class, DecodeConfiguration.DRIVETRAIN_MOTOR_FRONT_LEFT_NAME);
-//		frontRight = hm.get(DcMotorEx.class, DecodeConfiguration.DRIVETRAIN_MOTOR_FRONT_RIGHT_NAME);
-//		backRight = hm.get(DcMotorEx.class, DecodeConfiguration.DRIVETRAIN_MOTOR_BACK_RIGHT_NAME);
-
-		backLeft = (DcMotorEx) hm.dcMotor.get(BuzzBotConfiguration.DRIVETRAIN_MOTOR_BACK_LEFT_NAME);
-		frontLeft = (DcMotorEx) hm.dcMotor.get(BuzzBotConfiguration.DRIVETRAIN_MOTOR_FRONT_LEFT_NAME);
-		frontRight = (DcMotorEx) hm.dcMotor.get(BuzzBotConfiguration.DRIVETRAIN_MOTOR_FRONT_RIGHT_NAME);
-		backRight = (DcMotorEx) hm.dcMotor.get(BuzzBotConfiguration.DRIVETRAIN_MOTOR_BACK_RIGHT_NAME);
+		backLeft = hm.get(DcMotorEx.class, BuzzBotConfiguration.DRIVETRAIN_MOTOR_BACK_LEFT_NAME);
+		frontLeft = hm.get(DcMotorEx.class, BuzzBotConfiguration.DRIVETRAIN_MOTOR_FRONT_LEFT_NAME);
+		frontRight = hm.get(DcMotorEx.class, BuzzBotConfiguration.DRIVETRAIN_MOTOR_FRONT_RIGHT_NAME);
+		backRight = hm.get(DcMotorEx.class, BuzzBotConfiguration.DRIVETRAIN_MOTOR_BACK_RIGHT_NAME);
 
 
-		backLeft.setDirection(BuzzBotConfiguration.DRIVETRAIN_MOTOR_BACK_LEFT_DIRECTION);
-		frontLeft.setDirection(BuzzBotConfiguration.DRIVETRAIN_MOTOR_FRONT_LEFT_DIRECTION);
-		frontRight.setDirection(BuzzBotConfiguration.DRIVETRAIN_MOTOR_FRONT_RIGHT_DIRECTION);
-		backRight.setDirection(BuzzBotConfiguration.DRIVETRAIN_MOTOR_BACK_RIGHT_DIRECTION);
+
+		backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+		frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+		frontRight.setDirection(DcMotorSimple.Direction.FORWARD);
+		backRight.setDirection(DcMotorSimple.Direction.FORWARD);
 
 //		frontLeft.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 //		frontRight.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
@@ -81,13 +76,13 @@ public class BuzzBotMecanumDrivetrain extends DefenderBotDrivetrain {
 	}
 
 	private void setProportionalPower(double bl, double fl, double fr, double br) {
-		setProportionalPower(bl, fl, fr, br, BuzzBotConfiguration.DRIVETRAIN_POWER_MAX_AUTONOMOUS);
+//		setProportionalPower(bl, fl, fr, br, BuzzBotConfiguration.DRIVETRAIN_POWER_MAX_AUTONOMOUS);
 	}
 
 	private void setProportionalPower(double bl, double fl, double fr, double br, double p) {
 
 		// I think the way this is supposed to work is not scaling based on the largest,
-		// but instead off of the front left value—which should be he max value
+		// but instead of the front left value—which should be he max value
 
 		bl *= p;
 		fl *= p;

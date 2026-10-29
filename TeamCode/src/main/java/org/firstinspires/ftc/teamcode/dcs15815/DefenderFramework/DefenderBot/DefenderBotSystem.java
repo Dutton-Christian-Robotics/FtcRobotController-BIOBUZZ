@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 abstract public class DefenderBotSystem {
     public HardwareMap hardwareMap;
-    public DefenderBotConfiguration BuzzBotConfiguration;
+    public DefenderBotConfiguration config;
     public DefenderBot bot;
     private boolean logging = false;
 
