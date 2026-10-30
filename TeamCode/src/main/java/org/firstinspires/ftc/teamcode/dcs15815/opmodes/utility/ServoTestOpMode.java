@@ -45,7 +45,6 @@ public class ServoTestOpMode extends LinearOpMode {
 
 			telemetry.addData("Position", position);
 			telemetry.update();
-			sleep(2000);
 
 
 		}
