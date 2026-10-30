@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.Utility;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderUtilities.DefenderDebouncer;
+
 @Utility(name = "Servo Test", description = "")
 public class ServoTestOpMode extends LinearOpMode {
 	Servo servo;
@@ -13,7 +15,7 @@ public class ServoTestOpMode extends LinearOpMode {
 	@Override
 	public void runOpMode() {
 
-		servo = hardwareMap.servo.get("gate_servo");
+		servo = hardwareMap.servo.get("gate_servo_left");
 		double position = 0;
 
 		waitForStart();
@@ -22,17 +24,17 @@ public class ServoTestOpMode extends LinearOpMode {
 			if (gamepad1.dpad_left) {
 				position = 0;
 				servo.setPosition(position);
-			} else if (gamepad1.dpad_up) {
-				position += .1;
+			} else if (gamepad1.dpadUpWasPressed()) {
+				position += .05;
 				if (position > 1) {
 					position = 1;
 				}
 				servo.setPosition(position);
-			} else if (gamepad1.dpad_right) {
+			} else if (gamepad1.dpadRightWasPressed()) {
 				position = 1;
 				servo.setPosition(position);
-			} else if (gamepad1.dpad_down) {
-				position -= .1;
+			} else if (gamepad1.dpadDownWasPressed()) {
+				position -= .05;
 				if (position < 0) {
 					position = 0;
 				}
@@ -43,6 +45,8 @@ public class ServoTestOpMode extends LinearOpMode {
 
 			telemetry.addData("Position", position);
 			telemetry.update();
+			sleep(2000);
+
 
 		}
 
