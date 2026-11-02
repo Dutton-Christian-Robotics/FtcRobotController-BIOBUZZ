@@ -17,7 +17,7 @@ public class BuzzBotConfiguration {
 	public static String colin_punction = "octothorpe";
 
 
-	/* DRIVETRAIN -------------------------------------------------- */
+/* DRIVETRAIN -------------------------------------------------- */
 
 	public static String DRIVETRAIN_MOTOR_BACK_LEFT_NAME = "drivetrain_motor_back_left"; //
 	public static String DRIVETRAIN_MOTOR_FRONT_LEFT_NAME = "drivetrain_motor_front_left"; //
@@ -33,13 +33,15 @@ public class BuzzBotConfiguration {
 	public static int DRIVETRAIN_MAX_TICKS_PER_SECOND = 2800;
 
 
-	/* INTAKE ---------------------------------------------------------- */
-public static String INTAKE_MOTOR_NAME = "intake_motor";
-public static DcMotorSimple.Direction INTAKE_MOTOR_DIRECTION = DcMotorSimple.Direction.FORWARD;
-public static double INTAKE_MOTOR_POWER_MAX = 1;
-	/* PROBOSCIS ---------------------------------------------------------- */
+/* INTAKE ---------------------------------------------------------- */
 
-	/* SHOOTER ---------------------------------------------------------- */
+	public static String INTAKE_MOTOR_NAME = "intake_motor";
+	public static DcMotorSimple.Direction INTAKE_MOTOR_DIRECTION = DcMotorSimple.Direction.FORWARD;
+	public static double INTAKE_MOTOR_POWER_MAX = 1;
+
+/* PROBOSCIS ---------------------------------------------------------- */
+
+/* SHOOTER ---------------------------------------------------------- */
 
 	public static double SHOOTER_MOTOR_POWER_START = 1;
 	public static String SHOOTER_MOTOR_LEFT_NAME = "shooter_motor_left";
@@ -54,19 +56,19 @@ public static double INTAKE_MOTOR_POWER_MAX = 1;
 	public static double SHOOTER_MOTOR_LIFT_POWER_MAX = 1;
 	public static long SHOOTER_TIME_AFTER_MOTOR_START = 250;
 
-	/* GAMEPADS -------------------------------------------------------- */
+/* GAMEPADS -------------------------------------------------------- */
 
 	public static double GAMEPAD1_RIGHT_STICK_X_CURVE = 1;
 //	public static double GAMEPAD1_RIGHT_STICK_X_CURVE = 4;
 	public static double GAMEPAD1_RIGHT_STICK_X_MAX = 1;
 
 
-	/* EFFECTS -------------------------------------------------------- */
+/* EFFECTS -------------------------------------------------------- */
 
 	public static String EFFECTS_LEDS_NAME = "effects_leds"; // Control Hub, Servo 5
 
 
-	/* NAVIGATION -------------------------------------------------------- */
+/* NAVIGATION -------------------------------------------------------- */
 
 	public static double NAVIGATION_TOLERANCE = 1.0;
 
@@ -103,14 +105,14 @@ public static double INTAKE_MOTOR_POWER_MAX = 1;
 
 	public static long NAVIGATION_SETTLING_TIME = 400; //was 500
 
-	/* PRESETS -------------------------------------------------------- */
+/* PRESETS -------------------------------------------------------- */
 
-	/* ALL AUTONOMOUS -------------------------------------------------------- */
+/* ALL AUTONOMOUS -------------------------------------------------------- */
 	public static double DRIVETRAIN_POWER_MAX_AUTONOMOUS = 1;
 
 
 
-	/* METHODS -------------------------------------------------------- */
+/* METHODS -------------------------------------------------------- */
 
 	public BuzzBotConfiguration() {
 		super();

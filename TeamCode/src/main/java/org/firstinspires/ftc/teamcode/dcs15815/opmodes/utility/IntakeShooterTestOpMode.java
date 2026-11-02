@@ -26,8 +26,8 @@ public class IntakeShooterTestOpMode extends LinearOpMode {
 
 		intakeMotor.setDirection(DcMotor.Direction.FORWARD);
 		shooterLiftMotor.setDirection(DcMotor.Direction.REVERSE);
-		shooterMotorLeft.setDirection(DcMotor.Direction.REVERSE);
-		shooterMotorRight.setDirection(DcMotor.Direction.FORWARD);
+		shooterMotorLeft.setDirection(DcMotor.Direction.FORWARD);
+		shooterMotorRight.setDirection(DcMotor.Direction.REVERSE);
 
 		intakeServoLeft = hardwareMap.servo.get("gate_servo_left");
 		intakeServoRight = hardwareMap.servo.get("gate_servo_right");
