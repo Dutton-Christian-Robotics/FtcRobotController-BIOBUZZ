@@ -40,8 +40,12 @@ public class BuzzBotConfiguration {
 	public static double INTAKE_MOTOR_POWER_MAX = 1;
 
 /* PROBOSCIS ---------------------------------------------------------- */
-
-/* SHOOTER ---------------------------------------------------------- */
+	public static double PROBOSCIS_SERVO_POWER_MAX = 1;
+	public static String PROBOSCIS_SERVO_LEFT_NAME = "proboscis_servo_left";
+	public static String PROBOSCIS_SERVO_RIGHT_NAME = "proboscis_servo_right";
+	public static double PROBOSCIS_SERVO_RIGHT_DIRECTION = 1;
+	public static double PROBOSCIS_SERVO_LEFT_DIRECTION = -1;
+	/* SHOOTER ---------------------------------------------------------- */
 
 	public static double SHOOTER_MOTOR_POWER_START = 1;
 	public static String SHOOTER_MOTOR_LEFT_NAME = "shooter_motor_left";
