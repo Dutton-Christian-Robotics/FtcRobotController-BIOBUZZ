@@ -14,7 +14,7 @@ public class CrServoTestOpMode extends LinearOpMode {
 	@Override
 	public void runOpMode() {
 
-		servo = hardwareMap.crservo.get("proboscis_servo_right");
+		servo = hardwareMap.crservo.get("proboscis_servo_left");
 		double power = 0;
 
 		waitForStart();

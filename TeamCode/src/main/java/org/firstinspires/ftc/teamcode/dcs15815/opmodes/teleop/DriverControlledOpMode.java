@@ -23,10 +23,10 @@ public class DriverControlledOpMode extends LinearOpMode {
 
 		while (opModeIsActive()) {
 
-			bot.drivetrain.driveNoProportional(
-				   gamepad1.left_stick_y,
-				   (gamepad1.right_trigger - gamepad1.left_trigger),
-				   gamepad1.right_stick_x);
+//			bot.drivetrain.driveNoProportional(
+//				   gamepad1.left_stick_y,
+//				   (gamepad1.right_trigger - gamepad1.left_trigger),
+//				   gamepad1.right_stick_x);
 
 		}
 
