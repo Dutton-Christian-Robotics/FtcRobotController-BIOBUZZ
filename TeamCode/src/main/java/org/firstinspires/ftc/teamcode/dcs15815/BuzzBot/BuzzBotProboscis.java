@@ -13,19 +13,20 @@ public class BuzzBotProboscis extends DefenderBotSystem {
         super(hm, b);
 
         servoLeft = hm.crservo.get(BuzzBotConfiguration.PROBOSCIS_SERVO_LEFT_NAME);
-        servoLeft = hm.crservo.get(BuzzBotConfiguration.PROBOSCIS_SERVO_RIGHT_NAME);
+        servoRight = hm.crservo.get(BuzzBotConfiguration.PROBOSCIS_SERVO_RIGHT_NAME);
+
     }
 
     public void goOut(){
-        servoLeft.setPower(currentPower * BuzzBotConfiguration.PROBOSCIS_SERVO_LEFT_DIRECTION);
+//        servoLeft.setPower(currentPower * BuzzBotConfiguration.PROBOSCIS_SERVO_LEFT_DIRECTION);
         servoRight.setPower(currentPower * BuzzBotConfiguration.PROBOSCIS_SERVO_RIGHT_DIRECTION);
     }
     public void goIn(){
-        servoLeft.setPower(-1 * currentPower * BuzzBotConfiguration.PROBOSCIS_SERVO_LEFT_DIRECTION);
+//        servoLeft.setPower(-1 * currentPower * BuzzBotConfiguration.PROBOSCIS_SERVO_LEFT_DIRECTION);
         servoRight.setPower(-1 * currentPower * BuzzBotConfiguration.PROBOSCIS_SERVO_RIGHT_DIRECTION);
     }
     public void stop(){
-        servoLeft.setPower(0);
+//        servoLeft.setPower(0);
         servoRight.setPower(0);
     }
     public void changePower(double p){

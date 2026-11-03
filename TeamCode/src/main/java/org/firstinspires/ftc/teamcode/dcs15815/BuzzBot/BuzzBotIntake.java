@@ -13,6 +13,7 @@ public class BuzzBotIntake extends DefenderBotSystem {
 
     public DcMotor motor;
     public double currentPower = BuzzBotConfiguration.INTAKE_MOTOR_POWER_MAX;
+
     BuzzBotIntake(HardwareMap hm, DefenderBot b){
 
         super(hm, b);

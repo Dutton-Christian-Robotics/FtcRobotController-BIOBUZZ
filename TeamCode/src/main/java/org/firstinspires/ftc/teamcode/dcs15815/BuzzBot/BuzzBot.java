@@ -16,14 +16,20 @@ import java.util.function.BooleanSupplier;
 public class BuzzBot extends DefenderBot {
 
 	private boolean useDebugging = false;
-	public BooleanSupplier abortOpMode = () -> false;
-	BuzzBotMecanumDrivetrain drivetrain;
+	public BuzzBotMecanumDrivetrain drivetrain;
+	public BuzzBotShooter shooter;
+	public BuzzBotProboscis proboscis;
+	public BuzzBotIntake intake;
 
 
 	public BuzzBot(HardwareMap hm, Class configClass, Telemetry t) {
 		super(hm, configClass, t);
 
 		drivetrain = addSystem(new BuzzBotMecanumDrivetrain(hm, this));
+		shooter = addSystem(new BuzzBotShooter(hm, this));
+		intake = addSystem(new BuzzBotIntake(hm, this));
+		proboscis = addSystem(new BuzzBotProboscis(hm, this));
+
 
 //		navigation = addSystem(new DecodeNavigation(hm, this));
 
