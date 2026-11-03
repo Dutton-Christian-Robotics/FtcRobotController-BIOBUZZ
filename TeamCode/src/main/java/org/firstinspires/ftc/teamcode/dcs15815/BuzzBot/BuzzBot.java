@@ -21,6 +21,8 @@ public class BuzzBot extends DefenderBot {
 	public BuzzBotProboscis proboscis;
 	public BuzzBotIntake intake;
 
+	public BooleanSupplier abortOpMode = () -> false;
+
 
 	public BuzzBot(HardwareMap hm, Class configClass, Telemetry t) {
 		super(hm, configClass, t);

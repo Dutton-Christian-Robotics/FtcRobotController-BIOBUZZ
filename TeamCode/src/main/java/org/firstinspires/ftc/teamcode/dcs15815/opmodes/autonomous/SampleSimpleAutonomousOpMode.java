@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBot;
 import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBotConfiguration;
 
 @Disabled
-@Autonomous(name = "Sample SimpleAutonomous", group = "Samples")
+@Autonomous(name = "Sample Simple Autonomous", group = "Samples")
 public class SampleSimpleAutonomousOpMode extends LinearOpMode {
 
 	BuzzBot bot;
