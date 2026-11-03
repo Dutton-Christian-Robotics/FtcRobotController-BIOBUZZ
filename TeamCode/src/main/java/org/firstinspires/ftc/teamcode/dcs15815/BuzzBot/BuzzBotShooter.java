@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.dcs15815.BuzzBot;
 
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBot;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBotSystem;
@@ -10,6 +11,8 @@ public class BuzzBotShooter extends DefenderBotSystem  {
 
     public DcMotorEx motorLeft, motorRight, motorLift;
     public double currentShooterPower = BuzzBotConfiguration.SHOOTER_MOTOR_POWER_START;
+
+    public Servo gateServoLeft, gateServoRight;
 
     BuzzBotShooter(HardwareMap hm, DefenderBot b) {
         super(hm, b);
@@ -20,6 +23,10 @@ public class BuzzBotShooter extends DefenderBotSystem  {
         motorLeft.setDirection(BuzzBotConfiguration.SHOOTER_MOTOR_LEFT_DIRECTION);
         motorRight.setDirection(BuzzBotConfiguration.SHOOTER_MOTOR_RIGHT_DIRECTION);
         motorLift.setDirection(BuzzBotConfiguration.SHOOTER_MOTOR_LIFT_DIRECTION);
+
+        gateServoLeft = hm.servo.get(BuzzBotConfiguration.SHOOTER_GATE_SERVO_LEFT_NAME);
+        gateServoRight = hm.servo.get(BuzzBotConfiguration.SHOOTER_GATE_SERVO_RIGHT_NAME);
+
     }
     public void turnOn() {
         motorLeft.setVelocity(currentShooterPower * BuzzBotConfiguration.SHOOTER_MOTOR_VELOCITY_MAX);
@@ -49,4 +56,20 @@ public class BuzzBotShooter extends DefenderBotSystem  {
         turnOff();
         turnOffLift();
     }
+
+    public void moveGateToShootPosition() {
+        gateServoLeft.setPosition(BuzzBotConfiguration.SHOOTER_GATE_SERVO_LEFT_POSITION_SHOOT);
+        gateServoRight.setPosition(BuzzBotConfiguration.SHOOTER_GATE_SERVO_RIGHT_POSITION_SHOOT);
+    }
+
+    public void moveGateToBlockPosition() {
+        gateServoLeft.setPosition(BuzzBotConfiguration.SHOOTER_GATE_SERVO_LEFT_POSITION_BLOCK);
+        gateServoRight.setPosition(BuzzBotConfiguration.SHOOTER_GATE_SERVO_RIGHT_POSITION_BLOCK);
+    }
+
+    public void moveGateToOuttakePosition() {
+        gateServoLeft.setPosition(BuzzBotConfiguration.SHOOTER_GATE_SERVO_LEFT_POSITION_OUTTAKE);
+        gateServoRight.setPosition(BuzzBotConfiguration.SHOOTER_GATE_SERVO_RIGHT_POSITION_OUTTAKE);
+    }
+
 }
