@@ -40,25 +40,41 @@ public class BuzzBotConfiguration {
 	public static double INTAKE_MOTOR_POWER_MAX = 1;
 
 /* PROBOSCIS ---------------------------------------------------------- */
+
 	public static double PROBOSCIS_SERVO_POWER_MAX = 1;
 	public static String PROBOSCIS_SERVO_LEFT_NAME = "proboscis_servo_left";
 	public static String PROBOSCIS_SERVO_RIGHT_NAME = "proboscis_servo_right";
 	public static double PROBOSCIS_SERVO_RIGHT_DIRECTION = 1;
 	public static double PROBOSCIS_SERVO_LEFT_DIRECTION = -1;
-	/* SHOOTER ---------------------------------------------------------- */
+
+
+/* SHOOTER ---------------------------------------------------------- */
 
 	public static double SHOOTER_MOTOR_POWER_START = 1;
+
 	public static String SHOOTER_MOTOR_LEFT_NAME = "shooter_motor_left";
 	public static String SHOOTER_MOTOR_RIGHT_NAME = "shooter_motor_right";
-	public static String SHOOTER_MOTOR_LIFT_NAME = "shooter_motor_lift";
-	public static DcMotorSimple.Direction SHOOTER_MOTOR_LEFT_DIRECTION = DcMotorSimple.Direction.REVERSE;
-	public static DcMotorSimple.Direction SHOOTER_MOTOR_RIGHT_DIRECTION = DcMotorSimple.Direction.FORWARD;
+	public static String SHOOTER_MOTOR_LIFT_NAME = "shooter_lift_motor";
+	public static DcMotorSimple.Direction SHOOTER_MOTOR_LEFT_DIRECTION = DcMotorSimple.Direction.FORWARD;
+	public static DcMotorSimple.Direction SHOOTER_MOTOR_RIGHT_DIRECTION = DcMotorSimple.Direction.REVERSE;
+
 	public static DcMotorSimple.Direction SHOOTER_MOTOR_LIFT_DIRECTION = DcMotorSimple.Direction.REVERSE;
 
 	public static double SHOOTER_MOTOR_VELOCITY_MAX = 2400;
 	public static double SHOOTER_MOTOR_POWER_MAX = 1;
 	public static double SHOOTER_MOTOR_LIFT_POWER_MAX = 1;
 	public static long SHOOTER_TIME_AFTER_MOTOR_START = 250;
+
+	public static String SHOOTER_GATE_SERVO_LEFT_NAME = "gate_servo_left";
+	public static String SHOOTER_GATE_SERVO_RIGHT_NAME = "gate_servo_right";
+
+	public static double SHOOTER_GATE_SERVO_LEFT_POSITION_BLOCK = 0.475;
+	public static double SHOOTER_GATE_SERVO_LEFT_POSITION_SHOOT = 1;
+	public static double SHOOTER_GATE_SERVO_LEFT_POSITION_OUTTAKE = 0;
+
+	public static double SHOOTER_GATE_SERVO_RIGHT_POSITION_SHOOT = 0;
+	public static double SHOOTER_GATE_SERVO_RIGHT_POSITION_BLOCK = 0.475;
+	public static double SHOOTER_GATE_SERVO_RIGHT_POSITION_OUTTAKE = 1;
 
 /* GAMEPADS -------------------------------------------------------- */
 
