@@ -28,7 +28,7 @@ public class DriverControlledOpMode extends LinearOpMode {
 			bot.drivetrain.driveNoProportional(
 				   gamepad1.left_stick_y,
 				   (gamepad1.right_trigger - gamepad1.left_trigger),
-				   gamepad1.right_stick_x);
+				   -1 * gamepad1.right_stick_x);
 
 			if (gamepad2.leftTriggerWasPressed()) {
 				bot.intake.turnOn();
