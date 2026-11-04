@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.dcs15815.DefenderStateMachine;
 
 
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBot;
-import org.firstinspires.ftc.teamcode.dcs15815.opmodes.DecodeAutonomousOpMode;
+import org.firstinspires.ftc.teamcode.dcs15815.opmodes.autonomous.BuzzBotAutonomousOpMode;
 
 
 public class DefenderStateMachine {
@@ -10,7 +10,7 @@ public class DefenderStateMachine {
 	private DefenderState currentState;
 	public DefenderBot bot;
 	private boolean isFinished = false;
-	public DecodeAutonomousOpMode opMode = null;
+	public BuzzBotAutonomousOpMode opMode = null;
 	public boolean isDebugging = false;
 
 
@@ -26,7 +26,7 @@ public class DefenderStateMachine {
 		return s;
 	}
 
-	public DefenderStateMachine setOpMode(DecodeAutonomousOpMode om) {
+	public DefenderStateMachine setOpMode(BuzzBotAutonomousOpMode om) {
 		this.opMode = om;
 		this.bot = opMode.bot;
 		return this;

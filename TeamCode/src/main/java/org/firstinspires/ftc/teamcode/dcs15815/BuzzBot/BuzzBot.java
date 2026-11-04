@@ -17,6 +17,7 @@ public class BuzzBot extends DefenderBot {
 
 	private boolean useDebugging = false;
 	public BuzzBotMecanumDrivetrain drivetrain;
+	public BuzzBotNavigation navigation;
 	public BuzzBotShooter shooter;
 	public BuzzBotProboscis proboscis;
 	public BuzzBotIntake intake;
@@ -33,7 +34,7 @@ public class BuzzBot extends DefenderBot {
 		proboscis = addSystem(new BuzzBotProboscis(hm, this));
 
 
-//		navigation = addSystem(new DecodeNavigation(hm, this));
+		navigation = addSystem(new BuzzBotNavigation(hm, this));
 
 	}
 
