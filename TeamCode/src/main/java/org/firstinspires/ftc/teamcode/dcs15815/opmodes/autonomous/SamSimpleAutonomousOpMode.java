@@ -23,7 +23,8 @@ public class SamSimpleAutonomousOpMode extends LinearOpMode {
         sleep(100);
         bot.shooter.turnOnLift();
         sleep(1000);
-        bot.drivetrain.sleep(500);
+        bot.drivetrain.drive(0.5, 0, 0);
+        sleep(1500);
 
     }
 }
