@@ -21,6 +21,7 @@ public class BuzzBot extends DefenderBot {
 	public BuzzBotShooter shooter;
 	public BuzzBotProboscis proboscis;
 	public BuzzBotIntake intake;
+	public BuzzBotEffects effects;
 
 	public BooleanSupplier abortOpMode = () -> false;
 
@@ -32,9 +33,8 @@ public class BuzzBot extends DefenderBot {
 		shooter = addSystem(new BuzzBotShooter(hm, this));
 		intake = addSystem(new BuzzBotIntake(hm, this));
 		proboscis = addSystem(new BuzzBotProboscis(hm, this));
-
-
 		navigation = addSystem(new BuzzBotNavigation(hm, this));
+		effects = addSystem(new BuzzBotEffects(hm, this));
 
 	}
 
