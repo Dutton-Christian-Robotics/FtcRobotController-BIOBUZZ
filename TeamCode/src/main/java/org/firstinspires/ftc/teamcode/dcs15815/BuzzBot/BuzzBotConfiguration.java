@@ -50,10 +50,6 @@ public class BuzzBotConfiguration {
 
 /* SHOOTER ---------------------------------------------------------- */
 
-	public static double SHOOTER_MOTOR_POWER_START = 0.95;
-
-	public static double SHOOTER_MOTOR_POWER_POLLEN = 0.9;
-	public static double SHOOTER_MOTOR_POWER_NECTAR = 1;
 
 	public static String SHOOTER_MOTOR_LEFT_NAME = "shooter_motor_left";
 	public static String SHOOTER_MOTOR_RIGHT_NAME = "shooter_motor_right";
@@ -62,6 +58,11 @@ public class BuzzBotConfiguration {
 	public static DcMotorSimple.Direction SHOOTER_MOTOR_RIGHT_DIRECTION = DcMotorSimple.Direction.REVERSE;
 
 	public static DcMotorSimple.Direction SHOOTER_MOTOR_LIFT_DIRECTION = DcMotorSimple.Direction.REVERSE;
+
+	public static double SHOOTER_MOTOR_POWER_START = .94;
+	public static double SHOOTER_MOTOR_POWER_POLLEN = 0.9;
+	public static double SHOOTER_MOTOR_POWER_NECTAR = 1;
+
 
 	public static double SHOOTER_MOTOR_VELOCITY_MAX = 2400;
 	public static double SHOOTER_MOTOR_POWER_MAX = 1;
