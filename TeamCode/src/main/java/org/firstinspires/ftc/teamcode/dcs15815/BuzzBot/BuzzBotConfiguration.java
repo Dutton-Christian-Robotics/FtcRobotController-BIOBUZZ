@@ -37,7 +37,7 @@ public class BuzzBotConfiguration {
 
 	public static String INTAKE_MOTOR_NAME = "intake_motor";
 	public static DcMotorSimple.Direction INTAKE_MOTOR_DIRECTION = DcMotorSimple.Direction.FORWARD;
-	public static double INTAKE_MOTOR_POWER_MAX = .80;
+	public static double INTAKE_MOTOR_POWER_MAX = 1;
 
 /* PROBOSCIS ---------------------------------------------------------- */
 
@@ -50,7 +50,6 @@ public class BuzzBotConfiguration {
 
 /* SHOOTER ---------------------------------------------------------- */
 
-	public static double SHOOTER_MOTOR_POWER_START = 1;
 
 	public static String SHOOTER_MOTOR_LEFT_NAME = "shooter_motor_left";
 	public static String SHOOTER_MOTOR_RIGHT_NAME = "shooter_motor_right";
@@ -60,8 +59,16 @@ public class BuzzBotConfiguration {
 
 	public static DcMotorSimple.Direction SHOOTER_MOTOR_LIFT_DIRECTION = DcMotorSimple.Direction.REVERSE;
 
+	public static double SHOOTER_MOTOR_POWER_START = .94;
+	public static double SHOOTER_MOTOR_POWER_POLLEN = 0.9;
+	public static double SHOOTER_MOTOR_POWER_NECTAR = 1;
+
+
 	public static double SHOOTER_MOTOR_VELOCITY_MAX = 2400;
 	public static double SHOOTER_MOTOR_POWER_MAX = 1;
+
+
+
 	public static double SHOOTER_MOTOR_LIFT_POWER_MAX = 1;
 	public static long SHOOTER_TIME_AFTER_MOTOR_START = 250;
 

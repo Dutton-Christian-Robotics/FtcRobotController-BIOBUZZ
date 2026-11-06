@@ -20,10 +20,30 @@ public class DriverControlledOpMode extends LinearOpMode {
 		bot = new BuzzBot(hardwareMap, BuzzBotConfiguration.class, telemetry);
 
 		bot.shooter.moveGateToBlockPosition();
+		bot.effects.strobeGold();
 		waitForStart();
 		boolean shootingWheelsOn = false;
 
 		while (opModeIsActive()) {
+
+			/* CURRENT CONTROL CONFIGURATION =================
+
+				Forward / Reverse: GP1 left stick
+				Rotate: GP1 right stick
+				Strafe: GP1 left trigger + GP1 right trigger
+
+				Intake on: GP2 left rigger HELD (off on release)
+				Intake reverse, Gate to outtake: GP2 x HELD (off on release)
+
+				Shooter wheels on/off: GP2 right bumper (as toggle)
+				Lift on + Gate to shoot: GP2 right trigger HELD (off on release)
+
+				Extend Proboscis: GP2 a HELD (off on release)
+				Retract Proboscis: GP2 b HELD (off on release
+				Stop Proboscis: GP2 y pressed (shouldn't be needed)
+
+			 */
+
 
 			bot.drivetrain.driveNoProportional(
 				   gamepad1.left_stick_y,
@@ -72,6 +92,8 @@ public class DriverControlledOpMode extends LinearOpMode {
 				bot.proboscis.stop();
 			} else if (gamepad2.yWasPressed()) {
 				bot.proboscis.stop();
+//			} else if (gamepad2.dpadLeftWasPressed() || gamepad2.dpadRightWasPressed()) {
+//				bot.proboscis.changePower(0.5);
 			}
 
 
