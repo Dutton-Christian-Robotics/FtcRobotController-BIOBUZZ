@@ -27,7 +27,7 @@ public class SamSlightlyMoreAdvancedAutonomousOpMode extends LinearOpMode {
         bot.shooter.turnOff();
         bot.shooter.turnOffLift();
         bot.shooter.moveGateToBlockPosition();
-        bot.drivetrain.drive(0.75, 0, 0);
+        bot.drivetrain.drive(-0.75, 0, 0);
         sleep(3000);
         bot.drivetrain.drive(0, 0, -0.25);
         sleep(1000);

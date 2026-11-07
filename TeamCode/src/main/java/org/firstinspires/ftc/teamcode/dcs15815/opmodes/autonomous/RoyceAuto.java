@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBot;
 import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBotConfiguration;
 
-@Autonomous(name = "Delayed Shoot", group = "Royce")
+@Autonomous(name = "DOWN: Wait + Shoot + Move", group = "Hive Down", preselectTeleOp = "Driver Controlled")
 public class RoyceAuto extends LinearOpMode {
 
     BuzzBot bot;
@@ -31,12 +31,12 @@ public class RoyceAuto extends LinearOpMode {
             bot.shooter.moveGateToShootPosition();
             sleep(3000);
 
+            bot.shooter.moveGateToBlockPosition();
             bot.shooter.turnOff();
             bot.shooter.turnOffLift();
-            bot.shooter.moveGateToBlockPosition();
 
-            bot.drivetrain.drive(0.5, 0, 0);
-            sleep(750);
+            bot.drivetrain.driveNoProportional(0.5, 0, 0);
+            sleep(1000);
 
             bot.drivetrain.stopDriving();
         }
