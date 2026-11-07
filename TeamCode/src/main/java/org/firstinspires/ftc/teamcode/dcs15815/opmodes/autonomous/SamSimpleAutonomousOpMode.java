@@ -7,8 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBot;
 import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBotConfiguration;
 
-@Disabled
-@Autonomous(name = "Sam's Autonomous", group = "Samples")
+@Autonomous(name = "UP: Shoot + Move", group = "Hive Up")
 public class SamSimpleAutonomousOpMode extends LinearOpMode {
 
     BuzzBot bot;
@@ -23,8 +22,14 @@ public class SamSimpleAutonomousOpMode extends LinearOpMode {
         sleep(100);
         bot.shooter.turnOnLift();
         sleep(1000);
-        bot.drivetrain.drive(0.5, 0, 0);
-        sleep(1500);
+        bot.shooter.moveGateToShootPosition();
+        sleep(3500);
+        bot.shooter.moveGateToBlockPosition();
+        bot.shooter.turnOffLift();
+        bot.shooter.turnOff();
+        bot.drivetrain.driveNoProportional(0.5, 0, 0);
+        sleep(500);
+        bot.drivetrain.stopDriving();
 
     }
 }
