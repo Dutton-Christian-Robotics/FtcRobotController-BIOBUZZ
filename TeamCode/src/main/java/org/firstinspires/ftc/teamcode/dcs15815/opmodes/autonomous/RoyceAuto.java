@@ -20,7 +20,7 @@ public class RoyceAuto extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            sleep(6700);
+            sleep(15000);
 
             bot.shooter.turnOn();
             sleep(500);
@@ -35,8 +35,8 @@ public class RoyceAuto extends LinearOpMode {
             bot.shooter.turnOff();
             bot.shooter.turnOffLift();
 
-            bot.drivetrain.driveNoProportional(0.5, 0, 0);
-            sleep(1000);
+            bot.drivetrain.driveNoProportional(0.35, 0, 0);
+            sleep(500);
 
             bot.drivetrain.stopDriving();
         }
