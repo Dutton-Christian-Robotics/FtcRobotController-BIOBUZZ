@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBot;
 import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBotConfiguration;
 
-@Autonomous(name = "UP: Shoot + Move", group = "Hive Up")
+@Autonomous(name = "UP: Shoot + Move", group = "Up")
 public class SamSimpleAutonomousOpMode extends LinearOpMode {
 
     BuzzBot bot;

@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBot;
 import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBotConfiguration;
 
-@Autonomous(name = "DOWN: Wait + Shoot + Park", group = "Hive Down", preselectTeleOp = "Driver Controlled")
+@Autonomous(name = "DOWN: Wait + Shoot + Park", group = "Down", preselectTeleOp = "Driver Controlled")
 public class RoyceAutoPlaceholder2 extends LinearOpMode {
 
     BuzzBot bot;

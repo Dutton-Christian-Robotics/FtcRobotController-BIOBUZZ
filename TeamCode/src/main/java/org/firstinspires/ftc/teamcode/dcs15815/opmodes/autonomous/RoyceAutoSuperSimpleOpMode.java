@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBot;
 import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBotConfiguration;
 
-@Autonomous(name = "Move Only", group = "Opposite Side")
+@Autonomous(name = "DOWN: Move Only", group = "Down")
 public class RoyceAutoSuperSimpleOpMode extends LinearOpMode {
 
     BuzzBot bot;
