@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.dcs15815.BuzzBot;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
@@ -17,7 +16,7 @@ public class BuzzBotVision extends DefenderBotSystem {
 
     private static final boolean USE_WEBCAM = true;  // true for webcam, false for phone camera
 
-    private AprilTagProcessor aprilTag;
+    private AprilTagProcessor aprilTagProcessor;
 
     private VisionPortal visionPortal;
 
@@ -25,27 +24,27 @@ public class BuzzBotVision extends DefenderBotSystem {
     BuzzBotVision(HardwareMap hm, DefenderBot b){
         super(hm, b);
 
-        initAprilTag();
+        initAprilTagProcesor();
     }
 
-    private void initAprilTag() {
+    private void initAprilTagProcesor() {
 
         // Create the AprilTag processor the easy way.
-        aprilTag = AprilTagProcessor.easyCreateWithDefaults();
+        aprilTagProcessor = AprilTagProcessor.easyCreateWithDefaults();
 
         // Create the vision portal the easy way.
         if (USE_WEBCAM) {
             visionPortal = VisionPortal.easyCreateWithDefaults(
-                    hardwareMap.get(WebcamName.class, "Webcam 1"), aprilTag);
+                    hardwareMap.get(WebcamName.class, BuzzBotConfiguration.VISION_WEBCAM1_NAME), aprilTagProcessor);
         } else {
             visionPortal = VisionPortal.easyCreateWithDefaults(
-                    BuiltinCameraDirection.BACK, aprilTag);
+                    BuiltinCameraDirection.BACK, aprilTagProcessor);
         }
 
     }
 
     public List<AprilTagDetection> getCurrentDetections() {
-        return aprilTag.getDetections();
+        return aprilTagProcessor.getDetections();
     }
 
 

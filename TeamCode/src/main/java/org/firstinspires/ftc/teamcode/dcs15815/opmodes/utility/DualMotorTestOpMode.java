@@ -2,10 +2,11 @@ package org.firstinspires.ftc.teamcode.dcs15815.opmodes.utility;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.Utility;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@TeleOp(name = "Dual Motor Test", group="")
+@Utility(name = "Dual Motor Test", description="")
 public class DualMotorTestOpMode extends LinearOpMode {
 	DcMotor motor1;
 	DcMotor motor2;

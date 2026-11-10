@@ -83,7 +83,11 @@ public class BuzzBotConfiguration {
 	public static double SHOOTER_GATE_SERVO_RIGHT_POSITION_BLOCK = 0.475;
 	public static double SHOOTER_GATE_SERVO_RIGHT_POSITION_OUTTAKE = 1;
 
+//	public static String SHOOTER_
+
 /* VISION -------------------------------------------------------- */
+
+	public static String VISION_WEBCAM1_NAME = "Webcam 1";
 
 
 /* GAMEPADS -------------------------------------------------------- */
@@ -103,11 +107,11 @@ public class BuzzBotConfiguration {
 	public static double NAVIGATION_TOLERANCE = 1.0;
 
 	public static String NAVIGATION_PINPOINT_NAME = "pinpoint";
-	public static double NAVIGATION_PINPOINT_OFFSET_X = 87.5;
-	public static double NAVIGATION_PINPOINT_OFFSET_Y = -135.0;
+	public static double NAVIGATION_PINPOINT_OFFSET_X = 84.0;
+	public static double NAVIGATION_PINPOINT_OFFSET_Y = 300;
 	public static DistanceUnit NAVIGATION_PINPOINT_OFFSET_DISTANCEUNIT = DistanceUnit.MM;
 	public static GoBildaPinpointDriver.EncoderDirection NAVIGATION_PINPOINT_ENCODERDIRECTION_X = GoBildaPinpointDriver.EncoderDirection.FORWARD;
-	public static GoBildaPinpointDriver.EncoderDirection NAVIGATION_PINPOINT_ENCODERDIRECTION_Y = GoBildaPinpointDriver.EncoderDirection.FORWARD;
+	public static GoBildaPinpointDriver.EncoderDirection NAVIGATION_PINPOINT_ENCODERDIRECTION_Y = GoBildaPinpointDriver.EncoderDirection.REVERSED;
 	public static GoBildaPinpointDriver.GoBildaOdometryPods NAVIGATION_POD_TYPE = GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD;
 
 	public static double NAVIGATION_ANGULAR_SCALE = 0.997;
