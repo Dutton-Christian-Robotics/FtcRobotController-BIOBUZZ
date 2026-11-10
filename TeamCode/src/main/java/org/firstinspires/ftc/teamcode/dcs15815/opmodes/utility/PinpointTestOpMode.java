@@ -24,7 +24,7 @@ public class PinpointTestOpMode extends LinearOpMode {
 
         bot = new BuzzBot(hardwareMap, BuzzBotConfiguration.class, telemetry);
         bot.navigation.setPosition(new DefenderBotPosition(0, 0, 0));
-
+        sleep(5000); // will this help prevent the pinpoint resetting to 0?
 
         while (!isStarted() && !opModeIsActive()) {
             bot.navigation.updatePosition();
