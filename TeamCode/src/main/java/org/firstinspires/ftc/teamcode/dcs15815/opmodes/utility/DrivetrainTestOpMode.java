@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+@Disabled
 @Utility(name = "Drivetrain Test", description="Test")
 public class DrivetrainTestOpMode extends LinearOpMode {
 	public DcMotorEx backLeft, frontLeft, frontRight, backRight;
