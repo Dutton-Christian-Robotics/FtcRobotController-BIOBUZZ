@@ -7,12 +7,20 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBot;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBotSystem;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 public class BuzzBotShooter extends DefenderBotSystem  {
 
     public DcMotorEx motorLeft, motorRight, motorLift;
     public double currentShooterPower = BuzzBotConfiguration.SHOOTER_MOTOR_POWER_START;
 
-    public Servo gateServoLeft, gateServoRight;
+    public Servo gateServoLeft, gateServoRight, agitatorServoLeft, agitatorServoRight;
+
+    private BuzzBotAgitatorCycle agitatorCycleRunnable = new BuzzBotAgitatorCycle();
+    private Thread agitatorCycleThread;
+
 
     BuzzBotShooter(HardwareMap hm, DefenderBot b) {
         super(hm, b);
@@ -26,6 +34,15 @@ public class BuzzBotShooter extends DefenderBotSystem  {
 
         gateServoLeft = hm.servo.get(BuzzBotConfiguration.SHOOTER_GATE_SERVO_LEFT_NAME);
         gateServoRight = hm.servo.get(BuzzBotConfiguration.SHOOTER_GATE_SERVO_RIGHT_NAME);
+
+        agitatorServoLeft = hm.servo.get(BuzzBotConfiguration.SHOOTER_AGITATOR_SERVO_LEFT_NAME);
+        agitatorServoRight = hm.servo.get(BuzzBotConfiguration.SHOOTER_AGITATOR_SERVO_RIGHT_NAME);
+
+        agitatorCycleRunnable.setShooter(this);
+        agitatorCycleThread =  new Thread(agitatorCycleRunnable);
+        agitatorCycleThread.start();
+
+        moveAgitatorToRestPosition();
 
     }
     public void turnOn() {
@@ -56,6 +73,25 @@ public class BuzzBotShooter extends DefenderBotSystem  {
         turnOff();
         turnOffLift();
     }
+
+    public void moveAgitatorToRestPosition() {
+        agitatorServoLeft.setPosition(BuzzBotConfiguration.SHOOTER_AGITATOR_SERVO_LEFT_POSITION_REST);
+        agitatorServoRight.setPosition(BuzzBotConfiguration.SHOOTER_AGITATOR_SERVO_RIGHT_POSITION_REST);
+    }
+
+    public void moveAgitatorToPushPosition() {
+        agitatorServoLeft.setPosition(BuzzBotConfiguration.SHOOTER_AGITATOR_SERVO_LEFT_POSITION_PUSH);
+        agitatorServoRight.setPosition(BuzzBotConfiguration.SHOOTER_AGITATOR_SERVO_RIGHT_POSITION_PUSH);
+    }
+
+    public void startAgitatorCycle() {
+        agitatorCycleRunnable.start();
+    }
+
+    public void stopAgitatorCycle() {
+       agitatorCycleRunnable.stop();
+    }
+
 
     public void moveGateToShootPosition() {
         gateServoLeft.setPosition(BuzzBotConfiguration.SHOOTER_GATE_SERVO_LEFT_POSITION_SHOOT);

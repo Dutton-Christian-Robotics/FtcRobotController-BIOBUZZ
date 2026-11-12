@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+@Disabled
 @Utility(name = "Motor Test", description="")
 public class MotorTestOpMode extends LinearOpMode {
 	DcMotor motor;
