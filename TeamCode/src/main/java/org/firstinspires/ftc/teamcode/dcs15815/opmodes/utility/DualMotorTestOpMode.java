@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Utility;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBotConfiguration;
+
 @Utility(name = "Dual Motor Test", description = "Test 2 motors alternately")
 public class DualMotorTestOpMode extends LinearOpMode {
 	String name1, name2;
@@ -13,8 +15,8 @@ public class DualMotorTestOpMode extends LinearOpMode {
 	@Override
 	public void runOpMode() {
 
-		name1 = "x";
-		name2 = "x";
+		name1 = BuzzBotConfiguration.SHOOTER_MOTOR_LEFT_NAME;
+		name2 = BuzzBotConfiguration.SHOOTER_MOTOR_RIGHT_NAME;
 
 		motor1 = hardwareMap.dcMotor.get(name1);
 		motor2 = hardwareMap.dcMotor.get(name2);

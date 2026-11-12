@@ -42,6 +42,8 @@ public class DriverControlledOpMode extends LinearOpMode {
 				Retract Proboscis: GP2 b HELD (off on release
 				Stop Proboscis: GP2 y pressed (shouldn't be needed)
 
+
+
 			 */
 
 
@@ -62,6 +64,12 @@ public class DriverControlledOpMode extends LinearOpMode {
 				bot.shooter.moveGateToBlockPosition();
 			}
 
+//			if (gamepad2.dpadUpWasPressed()) {
+//				bot.shooter.moveAgitatorToPushPosition();
+//			} else if (gamepad2.dpadDownWasPressed()) {
+//				bot.shooter.moveAgitatorToRestPosition();
+//			}
+
 			if (gamepad2.rightBumperWasPressed()) {
 				if (!shootingWheelsOn) {
 					bot.shooter.turnOn();
@@ -76,8 +84,10 @@ public class DriverControlledOpMode extends LinearOpMode {
 				bot.shooter.turnOnLift();
 				// sleep?
 				bot.shooter.moveGateToShootPosition();
+				bot.shooter.startAgitatorCycle();
 
 			} else if (gamepad2.rightTriggerWasReleased()) {
+				bot.shooter.stopAgitatorCycle();
 				bot.shooter.turnOffLift();
 				bot.shooter.moveGateToBlockPosition();
 			}

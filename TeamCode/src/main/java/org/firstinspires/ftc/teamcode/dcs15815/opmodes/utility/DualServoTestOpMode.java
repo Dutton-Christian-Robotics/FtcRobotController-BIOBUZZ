@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Utility;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBotConfiguration;
+
 @Utility(name = "Dual Servo Test", description = "Test 2 servos alternately")
 public class DualServoTestOpMode extends LinearOpMode {
 	String name1, name2;
@@ -16,8 +18,8 @@ public class DualServoTestOpMode extends LinearOpMode {
 		name1 = "x";
 		name2 = "x";
 
-		servo1 = hardwareMap.servo.get(name1);
-		servo2 = hardwareMap.servo.get(name2);
+		servo1 = hardwareMap.servo.get(BuzzBotConfiguration.SHOOTER_AGITATOR_SERVO_LEFT_NAME);
+		servo2 = hardwareMap.servo.get(BuzzBotConfiguration.SHOOTER_AGITATOR_SERVO_RIGHT_NAME);
 		double position = 0;
 		double resolution = .1;
 		double minResolution = .01;

@@ -22,19 +22,20 @@ public class BuzzBotProboscis extends DefenderBotSystem {
     }
 
     public void goOut(){
-        enablePwm();
+//        enablePwm();
         servoLeft.setPower(currentPower * BuzzBotConfiguration.PROBOSCIS_SERVO_LEFT_DIRECTION);
         servoRight.setPower(currentPower * BuzzBotConfiguration.PROBOSCIS_SERVO_RIGHT_DIRECTION);
     }
     public void goIn(){
-        enablePwm();
+//        enablePwm();
         servoLeft.setPower(-1 * currentPower * BuzzBotConfiguration.PROBOSCIS_SERVO_LEFT_DIRECTION);
         servoRight.setPower(-1 * currentPower * BuzzBotConfiguration.PROBOSCIS_SERVO_RIGHT_DIRECTION);
+
     }
     public void stop() {
         servoLeft.setPower(0);
         servoRight.setPower(0);
-        disablePwm();
+//        disablePwm();
     }
 
     public void resetServos() {
