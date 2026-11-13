@@ -14,6 +14,7 @@ public class TimedDriveState extends DefenderState {
 	private double powerOverride = 0;
 	private long driveTime;
 	private ElapsedTime timer;
+	private boolean timerHasBeenReset = false;
 
 	public TimedDriveState(DefenderBotMotion m, long t) {
 		super();
@@ -92,6 +93,11 @@ public class TimedDriveState extends DefenderState {
 	@Override
 	public void run() {
 		BuzzBot bot = (BuzzBot) stateMachine.bot;
+
+		if (!timerHasBeenReset) {
+			timer.reset();
+			timerHasBeenReset = true;
+		}
 
 		if (stateMachine.isDebugging) {
 			if (stateLabel != null) {
