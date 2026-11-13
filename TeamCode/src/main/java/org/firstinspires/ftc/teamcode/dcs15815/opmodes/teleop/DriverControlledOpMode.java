@@ -20,10 +20,29 @@ public class DriverControlledOpMode extends LinearOpMode {
 		bot = new BuzzBot(hardwareMap, BuzzBotConfiguration.class, telemetry);
 
 		bot.shooter.moveGateToBlockPosition();
-		bot.effects.strobeGold();
+
+		if (DefenderAlliance.getInstance().isRed()) {
+			bot.effects.heartbeatRed();
+
+		} else if (DefenderAlliance.getInstance().isBlue()) {
+			bot.effects.heartbeatBlue();
+
+		} else {
+			bot.effects.heartbeatGray();
+		}
+
 		waitForStart();
 		boolean shootingWheelsOn = false;
 
+		if (DefenderAlliance.getInstance().isRed()) {
+			bot.effects.strobeRed();
+
+		} else if (DefenderAlliance.getInstance().isBlue()) {
+			bot.effects.strobeBlue();
+
+		} else {
+			bot.effects.strobeWhite();
+		}
 		while (opModeIsActive()) {
 
 			/* CURRENT CONTROL CONFIGURATION =================
@@ -33,6 +52,7 @@ public class DriverControlledOpMode extends LinearOpMode {
 				Strafe: GP1 left trigger + GP1 right trigger
 
 				Intake on: GP2 left rigger HELD (off on release)
+				Intake on slow: GP2 left bumper HELD (off on release)
 				Intake reverse, Gate to outtake: GP2 x HELD (off on release)
 
 				Shooter wheels on/off: GP2 right bumper (as toggle)
@@ -54,11 +74,17 @@ public class DriverControlledOpMode extends LinearOpMode {
 
 			if (gamepad2.leftTriggerWasPressed()) {
 				bot.intake.turnOn();
-			} else if (gamepad2.leftTriggerWasReleased()) {
+
+			} else if (gamepad2.leftBumperWasPressed()) {
+				bot.intake.turnOnForFlower();
+
+			} else if (gamepad2.leftTriggerWasReleased() || gamepad2.leftBumperWasReleased()) {
 				bot.intake.turnOff();
+
 			} else if (gamepad2.xWasPressed()) {
 				bot.intake.reverse();
 				bot.shooter.moveGateToOuttakePosition();
+
 			} else if (gamepad2.xWasReleased()) {
 				bot.intake.turnOff();
 				bot.shooter.moveGateToBlockPosition();
@@ -94,22 +120,31 @@ public class DriverControlledOpMode extends LinearOpMode {
 
 			if (gamepad2.aWasPressed()) {
 				bot.proboscis.goOut();
+
 			} else if (gamepad2.aWasReleased()) {
 				bot.proboscis.stop();
+
 			} else if (gamepad2.bWasPressed()) {
 				bot.proboscis.goIn();
+
 			} else if (gamepad2.bWasReleased()) {
 				bot.proboscis.stop();
+
 			} else if (gamepad2.yWasPressed()) {
 				bot.proboscis.stop();
 //			} else if (gamepad2.dpadLeftWasPressed() || gamepad2.dpadRightWasPressed()) {
 //				bot.proboscis.changePower(0.5);
 			}
 
+			telemetry.addData("Red", bot.vision.redHiveOrientation());
+			telemetry.addData("Blue", bot.vision.blueHiveOrientation());
+			telemetry.update();
 
-			// need way to use gate to push things out
+
 
 		}
+		bot.shooter.moveGateToBlockPosition();
+
 
 
 	}

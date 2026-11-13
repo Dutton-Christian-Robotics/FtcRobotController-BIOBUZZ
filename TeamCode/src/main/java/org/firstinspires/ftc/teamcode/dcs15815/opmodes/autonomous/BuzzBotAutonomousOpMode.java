@@ -7,11 +7,24 @@ import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBotConfiguration;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderUtilities.DefenderAlliance;
 
 
-public abstract class BuzzBotAutonomousOpMode extends LinearOpMode {
-    public BuzzBot bot;
-    DefenderAlliance.Color allianceColor = DefenderAlliance.Color.UNKNOWN;
 
-    public abstract void setAlliance();
+public abstract class BuzzBotAutonomousOpMode extends LinearOpMode {
+
+    public enum StartingSide {
+        UP,
+        DOWN,
+        UNKNOWN
+    }
+
+
+    public BuzzBot bot; // = new BuzzBot(hardwareMap, BuzzBotConfiguration.class, telemetry);
+    public DefenderAlliance.Color allianceColor = DefenderAlliance.Color.UNKNOWN;
+    public StartingSide startingSide = StartingSide.UNKNOWN;
+
+    public void setAlliance() {
+        DefenderAlliance.getInstance().setColor(allianceColor);
+    }
+
 
     public void setup() {
 
@@ -24,53 +37,68 @@ public abstract class BuzzBotAutonomousOpMode extends LinearOpMode {
 
         bot.abortOpMode = () -> isStopRequested();
 
+        setup();
+
+        sleep(BuzzBotConfiguration.VISION_WAIT_FOR_READY_TIME_AUTONOMOUS);
+        if (startingSide == StartingSide.UP) {
+            allianceColor = bot.vision.inferAllianceStartingUp();
+
+        } else if (startingSide == StartingSide.DOWN) {
+            allianceColor = bot.vision.inferAllianceStartingDown();
+        }
+
+
         setAlliance();
 
         if (DefenderAlliance.getInstance().isRed()) {
             telemetry.addData("Alliance", "RED");
+            bot.effects.heartbeatRed();
+
         } else if (DefenderAlliance.getInstance().isBlue()) {
             telemetry.addData("Alliance", "BLUE");
+            bot.effects.heartbeatBlue();
+
         } else {
             telemetry.addData("Alliance", "unknown");
+            bot.effects.heartbeatGray();
+
         }
         telemetry.update();
 
-        if (DefenderAlliance.getInstance().isRed()) {
-//            bot.effects.scanRed();
-        } else if (DefenderAlliance.getInstance().isBlue()) {
-//            bot.effects.scanBlue();
-        } else {
-//            bot.effects.wavesParty();
-        }
-
-        setup();
 
         waitForStart();
 
         if (DefenderAlliance.getInstance().isRed()) {
-//            bot.effects.heartbeatRed();
+            bot.effects.strobeRed();
+
         } else if (DefenderAlliance.getInstance().isBlue()) {
-//            bot.effects.heartbeatBlue();
+            bot.effects.strobeBlue();
+
         } else {
-//            bot.effects.wavesParty();
+            telemetry.addData("Alliance", "unknown");
+            bot.effects.strobeWhite();
+
         }
 
-        // DO SPECIFIC OPMODE STUFF HERE
-//        bot.effects.startLiveStatus();
         try {
             performAutonomous();
+
         } catch (Exception e) {
 
         }
 
 
         if (DefenderAlliance.getInstance().isRed()) {
-//            bot.effects.scanRed();
+            bot.effects.breathRed();
+
         } else if (DefenderAlliance.getInstance().isBlue()) {
-//            bot.effects.scanBlue();
+            bot.effects.breathBlue();
+
         } else {
-//            bot.effects.wavesParty();
+            bot.effects.breathGray();
         }
+
+        bot.shooter.moveGateToBlockPosition();
 
     }
 

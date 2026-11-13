@@ -22,12 +22,13 @@ public class BuzzBotIntake extends DefenderBotSystem {
         motor.setDirection(BuzzBotConfiguration.INTAKE_MOTOR_DIRECTION);
     }
 
-    public void turnOn()
-    {
+    public void turnOn() {
        motor.setPower(currentPower);
     }
-    public void turnOff()
-    {
+    public void turnOnForFlower() {
+        motor.setPower(BuzzBotConfiguration.INTAKE_MOTOR_POWER_FLOWER);
+    }
+    public void turnOff() {
         motor.setPower(0);
     }
 

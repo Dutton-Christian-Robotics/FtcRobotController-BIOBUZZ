@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.dcs15815.opmodes.autonomous;
+package org.firstinspires.ftc.teamcode.dcs15815.opmodes.unused;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -7,8 +7,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBot;
 import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBotConfiguration;
 
-@Autonomous(name = "DOWN: Move", group = "Down", preselectTeleOp = "Driver Controlled")
-public class RoyceAutoMoveOnlyOpMode extends LinearOpMode {
+@Disabled
+@Autonomous(name = "Sam's Second Autonomous", group = "Samples")
+public class SamAutonomousOpModeTwo extends LinearOpMode {
 
     BuzzBot bot;
 
@@ -18,15 +19,15 @@ public class RoyceAutoMoveOnlyOpMode extends LinearOpMode {
 
         waitForStart();
 
-        while (opModeIsActive()) {
+        bot.shooter.turnOn();
+        sleep(100);
+        bot.shooter.turnOnLift();
+        sleep(1000);
+        bot.drivetrain.drive(-0.5, 0, 0);
+        sleep(5000);
+        bot.drivetrain.drive(0, 0.5, 0);
+        sleep(500);
 
-
-            bot.drivetrain.driveNoProportional(0.5, 0, 0);
-            sleep(500);
-
-            bot.drivetrain.stopDriving();
-
-        }
 
     }
 }

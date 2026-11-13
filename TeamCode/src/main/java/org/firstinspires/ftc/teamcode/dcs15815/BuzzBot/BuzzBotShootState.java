@@ -22,7 +22,17 @@ public class BuzzBotShootState extends DefenderState {
 	@Override
 	public void run() {
 		BuzzBot bot = (BuzzBot)stateMachine.bot;
-//		bot.shooter.shootAutonomously(boost);
+
+		if (stateMachine.isDebugging) {
+			stateMachine.addTelemetryLine("starting to shoot");
+		}
+		bot.shooter.shootAutonomously();
+
+		if (stateMachine.isDebugging) {
+			stateMachine.addTelemetryLine("done shooting");
+		}
+//		stateMachine.opMode.sleep(3000);
+
 		isFinished = true;
 	}
 }
