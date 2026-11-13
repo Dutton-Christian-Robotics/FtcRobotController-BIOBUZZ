@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.dcs15815.BuzzBot;
 
-import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
+//import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
+import org.firstinspires.ftc.teamcode.dcs15815.GoBildaPinpointDriver;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -12,6 +13,9 @@ import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBotMecanumDrivetrain;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBot;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBotPosition;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBotSystem;
+
+import static org.firstinspires.ftc.robotcore.external.navigation.AngleUnit.DEGREES;
+import static org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit.INCH;
 import static org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit.MM;
 import static org.firstinspires.ftc.robotcore.external.navigation.AngleUnit.RADIANS;
 
@@ -117,6 +121,10 @@ public class BuzzBotNavigation extends DefenderBotSystem {
 		setPosition(new DefenderBotPosition(x, y, h));
 	}
 
+	public boolean driveToFromCurrent(DefenderBotPosition p) {
+		return driveTo(pinpoint.getPosition(), p.asPose2D(), BuzzBotConfiguration.DRIVETRAIN_POWER_MAX_AUTONOMOUS, 0);
+	}
+
 	public boolean driveToFromCurrent(Pose2D targetPosition) {
 		return driveTo(pinpoint.getPosition(), targetPosition, BuzzBotConfiguration.DRIVETRAIN_POWER_MAX_AUTONOMOUS, 0);
 	}
@@ -141,6 +149,7 @@ public class BuzzBotNavigation extends DefenderBotSystem {
 			holdTimer = new ElapsedTime();
 		}
 
+		pinpoint.update();
 		totalError = 0;
 		double xPWR = calculatePID(currentPosition, targetPosition, Direction.x);
 		double yPWR = calculatePID(currentPosition, targetPosition, Direction.y);
@@ -150,19 +159,26 @@ public class BuzzBotNavigation extends DefenderBotSystem {
 		double cosine = Math.cos(heading);
 		double sine = Math.sin(heading);
 
-		double xOutput = -1 * ((xPWR * cosine) + (yPWR * sine));
-		double yOutput = -1 * ((xPWR * sine) - (yPWR * cosine));
+		double xOutput = 1 * ((xPWR * cosine) + (yPWR * sine));
+		double yOutput = 1 * ((xPWR * sine) - (yPWR * cosine));
 
+		bot.telemetry.addData("current x", currentPosition.getX(INCH));
+		bot.telemetry.addData("current y", currentPosition.getY(INCH));
+		bot.telemetry.addData("current h", currentPosition.getHeading(DEGREES));
+
+		bot.telemetry.addData("target x", targetPosition.getX(INCH));
+		bot.telemetry.addData("target y", targetPosition.getY(INCH));
+		bot.telemetry.addData("target h", targetPosition.getHeading(DEGREES));
 
        /* ----------------------------------------------------------------------------------------
 		  X: + = forward, - = backward
 	       Y: + = left, - = right
             H: + = ccw, - = cw
          ---------------------------------------------------------------------------------------- */
-//        bot.telemetry.addData("x out", xOutput);
-//        bot.telemetry.addData("y out", yOutput);
-//        bot.telemetry.addData("h out", hOutput);
-//        bot.telemetry.addData("p", power);
+        bot.telemetry.addData("x out", xOutput);
+        bot.telemetry.addData("y out", yOutput);
+        bot.telemetry.addData("h out", hOutput);
+        bot.telemetry.addData("p", power);
 
 		if (!isAtTarget) {
 			drivetrain.driveWithPinpointValues(xOutput, yOutput, hOutput, power);
@@ -170,6 +186,7 @@ public class BuzzBotNavigation extends DefenderBotSystem {
 			drivetrain.stopDriving();
 		}
 //        calculateMecanumOutput(xOutput * power, yOutput * power, hOutput * power);
+		bot.telemetry.update();
 
 		if (inBounds(currentPosition, targetPosition) == InBounds.IN_BOUNDS) {
 			atTarget = true;
