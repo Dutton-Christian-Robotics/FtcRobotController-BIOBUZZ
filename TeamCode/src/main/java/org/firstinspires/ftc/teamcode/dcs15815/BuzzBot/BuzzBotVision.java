@@ -6,6 +6,7 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDir
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBot;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBotSystem;
+import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderUtilities.DefenderAlliance;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagClusterDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
@@ -171,6 +172,28 @@ public class BuzzBotVision extends DefenderBotSystem {
             return HiveOrientation.UNKNOWN;
         }
 
+    }
+
+    public DefenderAlliance.Color inferAllianceStartingUp() {
+
+        if (canSeeRedAudienceAprilTag()) {
+            return DefenderAlliance.Color.RED;
+        } else if (canSeeBlueScoringAprilTag()) {
+            return DefenderAlliance.Color.BLUE;
+        } else {
+            return DefenderAlliance.Color.UNKNOWN;
+        }
+    }
+
+    public DefenderAlliance.Color inferAllianceStartingDown() {
+
+        if (canSeeRedAudienceAprilTag()) {
+            return DefenderAlliance.Color.BLUE;
+        } else if (canSeeBlueScoringAprilTag()) {
+            return DefenderAlliance.Color.RED;
+        } else {
+            return DefenderAlliance.Color.UNKNOWN;
+        }
     }
 
 
