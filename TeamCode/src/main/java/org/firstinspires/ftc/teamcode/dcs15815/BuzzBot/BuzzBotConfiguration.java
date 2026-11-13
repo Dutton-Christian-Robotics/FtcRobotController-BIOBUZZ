@@ -7,7 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
+//import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
+import org.firstinspires.ftc.teamcode.dcs15815.GoBildaPinpointDriver;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBotConfiguration;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBotPosition;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderUtilities.DefenderPresets;
@@ -38,6 +39,7 @@ public class BuzzBotConfiguration {
 	public static String INTAKE_MOTOR_NAME = "intake_motor";
 	public static DcMotorSimple.Direction INTAKE_MOTOR_DIRECTION = DcMotorSimple.Direction.FORWARD;
 	public static double INTAKE_MOTOR_POWER_MAX = 1;
+	public static double INTAKE_MOTOR_POWER_FLOWER = 0.5;
 
 /* PROBOSCIS ---------------------------------------------------------- */
 
@@ -59,7 +61,8 @@ public class BuzzBotConfiguration {
 
 	public static DcMotorSimple.Direction SHOOTER_MOTOR_LIFT_DIRECTION = DcMotorSimple.Direction.REVERSE;
 
-	public static double SHOOTER_MOTOR_POWER_START = .91;
+//		public static double SHOOTER_MOTOR_POWER_START = 0.95;
+	public static double SHOOTER_MOTOR_POWER_START = .89;
 	public static double SHOOTER_MOTOR_POWER_POLLEN = 0.9;
 	public static double SHOOTER_MOTOR_POWER_NECTAR = 1;
 
@@ -69,7 +72,7 @@ public class BuzzBotConfiguration {
 
 
 
-	public static double SHOOTER_MOTOR_LIFT_POWER_MAX = 0.5;
+	public static double SHOOTER_MOTOR_LIFT_POWER_MAX = 0.25;
 	public static long SHOOTER_TIME_AFTER_MOTOR_START = 250;
 
 	public static String SHOOTER_GATE_SERVO_LEFT_NAME = "gate_servo_left";
@@ -151,9 +154,11 @@ public class BuzzBotConfiguration {
 /* PRESETS -------------------------------------------------------- */
 
 /* ALL AUTONOMOUS -------------------------------------------------------- */
-	public static double DRIVETRAIN_POWER_MAX_AUTONOMOUS = 1;
-
-
+	public static double DRIVETRAIN_POWER_MAX_AUTONOMOUS = 0.25;
+	public static long SHOOTER_SHOOT_TIME_AUTONOMOUS = 3000;
+	public static long VISION_WAIT_FOR_READY_TIME_AUTONOMOUS = 3000;
+	public static long VISION_WAIT_FOR_HIVE_TIP_TIME_AUTONOMOUS = 10000;
+	public static long SHOOTER_WAIT_FOR_TIP_TO_FINISH_TIME_AUTONOMOUS = 3000;
 
 /* METHODS -------------------------------------------------------- */
 
