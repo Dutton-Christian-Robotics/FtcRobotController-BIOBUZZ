@@ -1,0 +1,67 @@
+HOW TO PULL:
+checkout main
+update main
+(in tracked branch origin/main)  merge origin/main into main
+checkout sam
+(in main) merge main into sam
+
+HOW TO PUSH:
+commit
+select updated files
+commit and push
+commit and push anyway
+push
+
+
+
+
+starting positions:
+red up cell: X=69", Y=-12", h=0º
+red down cell: X=-69", Y=-12", h=180º
+blue up cell: X=-69", Y=12", h=180º
+blue down cell: X=69", Y=12", h=0º
+
+robot dimensions:
+18" long
+17" wide
+pinpoint:
+3" from front
+exact middle
+
+
+
+Main simple auton plan:
+start at up facing cell
+shoot
+drive to right past hive base
+strafe left (slower) or turn -90º and go forwards
+
+Secondary simple auton plan:
+start at down facing cell
+wait an undetermined amount of time
+shoot
+drive to right before hive base
+strafe right (slower) or turn 90º and go forwards
+
+Main complex auton plan:
+start at up facing cell
+shoot
+garden
+drive 5" away from wall
+turn -90º
+strafe left 6"
+
+option 1: intake, drive to garden
+drive to loading zone
+option 2: intake, drive to garden
+drive back to shooting position
+shoot
+drive to loading zone
+
+option 3: same as 1 but flower instead of garden
+option 4: same as 2 but flower instead of garden
+
+option 5: start from loading zone corner
+strafe 1" away from wall
+drive forwards into loading zone
+

@@ -25,7 +25,7 @@ public class SamWhyAreThereSoManyAutonsOpMode extends BuzzbotAutonomousOpMode {
                 .startWithState(
                         RunOnceState
                                 .make(() -> {
-                                    bot.navigation.setPosition("RED_UP_CELL_START"); //X=69", Y=-12", h=0º
+                                    bot.navigation.setPosition(69, -12, 0);
                                 })
                                 .setLabel("START")
                 ).andThen(
@@ -34,8 +34,8 @@ public class SamWhyAreThereSoManyAutonsOpMode extends BuzzbotAutonomousOpMode {
                                 .setLabel("SHOOT PRELOAD")
                 ).andThen(
                         DriveToPositionState
-                                .where("LOADING ZONE")
-                                .setLabel("LOADING ZONE PARK")
+                                .where(-32, -69, -90)
+                                .setLabel("RED LOADING ZONE PARK")
                 );
 
 
