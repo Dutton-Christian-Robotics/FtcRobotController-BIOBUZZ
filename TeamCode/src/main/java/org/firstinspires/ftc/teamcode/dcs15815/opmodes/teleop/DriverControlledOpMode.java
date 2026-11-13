@@ -20,10 +20,29 @@ public class DriverControlledOpMode extends LinearOpMode {
 		bot = new BuzzBot(hardwareMap, BuzzBotConfiguration.class, telemetry);
 
 		bot.shooter.moveGateToBlockPosition();
-		bot.effects.strobeGold();
+
+		if (DefenderAlliance.getInstance().isRed()) {
+			bot.effects.heartbeatRed();
+
+		} else if (DefenderAlliance.getInstance().isBlue()) {
+			bot.effects.heartbeatBlue();
+
+		} else {
+			bot.effects.heartbeatGray();
+		}
+
 		waitForStart();
 		boolean shootingWheelsOn = false;
 
+		if (DefenderAlliance.getInstance().isRed()) {
+			bot.effects.strobeRed();
+
+		} else if (DefenderAlliance.getInstance().isBlue()) {
+			bot.effects.strobeBlue();
+
+		} else {
+			bot.effects.strobeWhite();
+		}
 		while (opModeIsActive()) {
 
 			/* CURRENT CONTROL CONFIGURATION =================
@@ -124,6 +143,8 @@ public class DriverControlledOpMode extends LinearOpMode {
 
 
 		}
+		bot.shooter.moveGateToBlockPosition();
+
 
 
 	}
