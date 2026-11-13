@@ -22,7 +22,8 @@ public class BuzzBotShootState extends DefenderState {
 	@Override
 	public void run() {
 		BuzzBot bot = (BuzzBot)stateMachine.bot;
-//		bot.shooter.shootAutonomously(boost);
+
+		bot.shooter.shootAutonomously();
 		isFinished = true;
 	}
 }

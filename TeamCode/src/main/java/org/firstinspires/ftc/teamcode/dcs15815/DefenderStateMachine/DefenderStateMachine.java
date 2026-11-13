@@ -21,6 +21,15 @@ public class DefenderStateMachine {
 //		currentEvents = new ArrayList<>();
 	}
 
+	public DefenderStateMachine(DefenderBot b, BuzzBotAutonomousOpMode om) {
+//		eventSources = new ArrayList<>();
+		bot = b;
+		opMode = om;
+		isFinished = false;
+//		currentEvents = new ArrayList<>();
+	}
+
+
 	public DefenderState startWithState(DefenderState s) {
 		setState(s);
 		return s;
