@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.dcs15815.opmodes.autonomous;
+package org.firstinspires.ftc.teamcode.dcs15815.opmodes.unused;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBot;
 import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBotConfiguration;
 
+@Disabled
 @Autonomous(name = "DOWN: Wait + Shoot + Move", group = "Down", preselectTeleOp = "Driver Controlled")
 public class RoyceAuto extends LinearOpMode {
 
