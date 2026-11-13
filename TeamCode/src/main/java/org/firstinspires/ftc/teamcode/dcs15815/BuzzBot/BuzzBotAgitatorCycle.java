@@ -7,21 +7,22 @@ public class BuzzBotAgitatorCycle implements Runnable {
 
 	private BuzzBotShooter shooter;
 	private boolean isRunning = false;
+	public boolean shouldTerminate = false;
 
 	public void setShooter(BuzzBotShooter i) {
 		shooter = i;
 	}
 
 	public synchronized void stop() {
-		shooter.bot.telemetry.addData("stop","");
-		shooter.bot.telemetry.update();
 		this.isRunning = false;
 	}
 
 	public void start() {
 		this.isRunning = true;
-		shooter.bot.telemetry.addData("start","");
-		shooter.bot.telemetry.update();
+	}
+
+	public void terminate() {
+		shouldTerminate = true;
 	}
 
 
@@ -33,20 +34,14 @@ public class BuzzBotAgitatorCycle implements Runnable {
 	public void run() {
 		BuzzBot bot = (BuzzBot)this.shooter.bot;
 
-		while (true) {
-			bot.telemetry.addData("run", "");
-			bot.telemetry.update();
+		while (!Thread.currentThread().isInterrupted() && !shouldTerminate) {
 
 			while (keepRunning()) {
-				bot.telemetry.addData("inside while", "");
-				bot.telemetry.update();
 //				try {
-					this.shooter.moveAgitatorToRestPosition();
+					this.shooter.moveAgitatorToPushPosition();
 					bot.sleep(BuzzBotConfiguration.SHOOTER_AGITATOR_CYCLE_LENGTH);
 					this.shooter.moveAgitatorToRestPosition();
 					bot.sleep(BuzzBotConfiguration.SHOOTER_AGITATOR_CYCLE_LENGTH);
-					bot.telemetry.addData("after cycle", "");
-					bot.telemetry.update();
 //				} catch (InterruptedException e) {
 //					throw new RuntimeException(e);
 //				}
