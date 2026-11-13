@@ -20,15 +20,37 @@ public class DriverControlledOpMode extends LinearOpMode {
 		bot = new BuzzBot(hardwareMap, BuzzBotConfiguration.class, telemetry);
 
 		bot.shooter.moveGateToBlockPosition();
+		bot.effects.strobeGold();
 		waitForStart();
 		boolean shootingWheelsOn = false;
 
 		while (opModeIsActive()) {
 
+			/* CURRENT CONTROL CONFIGURATION =================
+
+				Forward / Reverse: GP1 left stick
+				Rotate: GP1 right stick
+				Strafe: GP1 left trigger + GP1 right trigger
+
+				Intake on: GP2 left rigger HELD (off on release)
+				Intake reverse, Gate to outtake: GP2 x HELD (off on release)
+
+				Shooter wheels on/off: GP2 right bumper (as toggle)
+				Lift on + Gate to shoot: GP2 right trigger HELD (off on release)
+
+				Extend Proboscis: GP2 a HELD (off on release)
+				Retract Proboscis: GP2 b HELD (off on release
+				Stop Proboscis: GP2 y pressed (shouldn't be needed)
+
+
+
+			 */
+
+
 			bot.drivetrain.driveNoProportional(
 				   gamepad1.left_stick_y,
 				   (gamepad1.right_trigger - gamepad1.left_trigger),
-				   gamepad1.right_stick_x);
+				   -1 * gamepad1.right_stick_x);
 
 			if (gamepad2.leftTriggerWasPressed()) {
 				bot.intake.turnOn();
@@ -41,6 +63,12 @@ public class DriverControlledOpMode extends LinearOpMode {
 				bot.intake.turnOff();
 				bot.shooter.moveGateToBlockPosition();
 			}
+
+//			if (gamepad2.dpadUpWasPressed()) {
+//				bot.shooter.moveAgitatorToPushPosition();
+//			} else if (gamepad2.dpadDownWasPressed()) {
+//				bot.shooter.moveAgitatorToRestPosition();
+//			}
 
 			if (gamepad2.rightBumperWasPressed()) {
 				if (!shootingWheelsOn) {
@@ -56,8 +84,10 @@ public class DriverControlledOpMode extends LinearOpMode {
 				bot.shooter.turnOnLift();
 				// sleep?
 				bot.shooter.moveGateToShootPosition();
+				bot.shooter.startAgitatorCycle();
 
 			} else if (gamepad2.rightTriggerWasReleased()) {
+				bot.shooter.stopAgitatorCycle();
 				bot.shooter.turnOffLift();
 				bot.shooter.moveGateToBlockPosition();
 			}
@@ -72,6 +102,8 @@ public class DriverControlledOpMode extends LinearOpMode {
 				bot.proboscis.stop();
 			} else if (gamepad2.yWasPressed()) {
 				bot.proboscis.stop();
+//			} else if (gamepad2.dpadLeftWasPressed() || gamepad2.dpadRightWasPressed()) {
+//				bot.proboscis.changePower(0.5);
 			}
 
 

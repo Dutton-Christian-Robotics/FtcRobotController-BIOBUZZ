@@ -20,15 +20,17 @@
  *   SOFTWARE.
  */
 
-package org.firstinspires.ftc.teamcode.dcs15815;
+package org.firstinspires.ftc.teamcode.dcs15815.opmodes.utility;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.Utility;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 import org.firstinspires.ftc.robotcore.external.navigation.UnnormalizedAngleUnit;
+import org.firstinspires.ftc.teamcode.dcs15815.GoBildaPinpointDriver;
 
 
 import java.util.Locale;
@@ -59,7 +61,7 @@ For support, contact tech@gobilda.com
 -Ethan Doak
  */
 
-@TeleOp(name="goBILDA Pinpoint Example", group="Testing")
+@Utility(name="goBILDA Pinpoint Example", description="Testing")
 
 public class SensorGoBildaPinpointExample extends LinearOpMode {
 

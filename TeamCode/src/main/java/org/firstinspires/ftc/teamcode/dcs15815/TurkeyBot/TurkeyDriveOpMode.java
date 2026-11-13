@@ -1,8 +1,10 @@
 package org.firstinspires.ftc.teamcode.dcs15815.TurkeyBot;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+@Disabled
 @TeleOp(name = "Turkey Drive", group = "Turkey")
 public class TurkeyDriveOpMode extends LinearOpMode {
 

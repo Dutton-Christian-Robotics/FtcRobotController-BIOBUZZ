@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.dcs15815.DefenderStateMachine;
 
-import org.firstinspires.ftc.teamcode.dcs15815.DecodeBot.DecodeBot;
-import org.firstinspires.ftc.teamcode.dcs15815.DecodeBot.DecodeConfiguration;
+import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBot;
+import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBotConfiguration;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBotPosition;
 
 public class DriveToPositionState extends DefenderState {
@@ -48,7 +48,7 @@ public class DriveToPositionState extends DefenderState {
 	public DriveToPositionState(String configName, long t) {
 		super();
 		try {
-			target = (DefenderBotPosition) DecodeConfiguration.class.getField(configName).get(DecodeConfiguration.class);
+			target = (DefenderBotPosition) BuzzBotConfiguration.class.getField(configName).get(BuzzBotConfiguration.class);
 			holdTime = t;
 //			powerFactor = 1;
 //			powerOverride = 0;
@@ -103,7 +103,7 @@ public class DriveToPositionState extends DefenderState {
 
 	@Override
 	public void run() {
-		DecodeBot bot = (DecodeBot) stateMachine.bot;
+		BuzzBot bot = (BuzzBot) stateMachine.bot;
 
 		bot.navigation.updatePosition();
 		if (stateMachine.isDebugging) {
@@ -118,7 +118,7 @@ public class DriveToPositionState extends DefenderState {
 		if (powerOverride > 0) {
 			power = powerOverride;
 		} else {
-			power = powerFactor * DecodeConfiguration.DRIVETRAIN_POWER_MAX_AUTONOMOUS;
+			power = powerFactor * BuzzBotConfiguration.DRIVETRAIN_POWER_MAX_AUTONOMOUS;
 		}
 
 		try {
