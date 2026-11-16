@@ -35,6 +35,10 @@ public class SamBackupUpsideShootParkStateMachineAutonomousOpMode extends BuzzBo
                 TimedDriveState
                     .moving(DefenderBotMotion.make(-0.40, 0, 0), 2500)
                     .setLabel("GO PARK")
+            ).andThen(
+                TimedDriveState
+                    .moving(DefenderBotMotion.make(0, 0.2, 0), 500)
+                    .setLabel("SAFETY STRAFE")
             );
     }
 }
