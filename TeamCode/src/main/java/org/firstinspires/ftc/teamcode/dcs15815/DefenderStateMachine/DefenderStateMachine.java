@@ -101,7 +101,8 @@ public class DefenderStateMachine {
 	public void run() {
 //		ArrayList<DefenderEvent> events = new ArrayList<>();
 
-		if (isFinished) {
+
+		if (isFinished || !opMode.opModeIsActive()) {
 			return;
 		}
 		if (currentState == null) {
