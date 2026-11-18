@@ -31,7 +31,7 @@ public abstract class BuzzBotAutonomousOpMode extends LinearOpMode {
     }
 
     @Override
-    public void runOpMode() {
+    public final void runOpMode() {
         bot = new BuzzBot(hardwareMap, BuzzBotConfiguration.class, telemetry);
 
 
@@ -99,6 +99,12 @@ public abstract class BuzzBotAutonomousOpMode extends LinearOpMode {
         }
 
         bot.shooter.moveGateToBlockPosition();
+
+        while (opModeIsActive()) {
+            // Just wait until our auton time is up.
+            // If we don't have this, then the opmode ends immediately
+            // and we don't see the breathing lights
+        }
 
     }
 
