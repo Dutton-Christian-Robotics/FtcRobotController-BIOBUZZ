@@ -95,7 +95,7 @@ public class BuzzBotConfiguration {
 	public static double SHOOTER_AGITATOR_SERVO_LEFT_POSITION_PUSH = 0.4;
 	public static double SHOOTER_AGITATOR_SERVO_RIGHT_POSITION_PUSH = 0.6;
 
-	public static long SHOOTER_AGITATOR_CYCLE_LENGTH = 750;
+	public static long SHOOTER_AGITATOR_CYCLE_LENGTH = 250;
 
 	/* VISION -------------------------------------------------------- */
 
