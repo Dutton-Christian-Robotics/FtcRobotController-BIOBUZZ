@@ -79,10 +79,10 @@ public class BuzzBotConfiguration {
 	public static String SHOOTER_GATE_SERVO_RIGHT_NAME = "gate_servo_right";
 
 	public static double SHOOTER_GATE_SERVO_LEFT_POSITION_BLOCK = 0.475;
-	public static double SHOOTER_GATE_SERVO_LEFT_POSITION_SHOOT = 1;
+	public static double SHOOTER_GATE_SERVO_LEFT_POSITION_SHOOT = 0.65;
 	public static double SHOOTER_GATE_SERVO_LEFT_POSITION_OUTTAKE = 0;
 
-	public static double SHOOTER_GATE_SERVO_RIGHT_POSITION_SHOOT = 0;
+	public static double SHOOTER_GATE_SERVO_RIGHT_POSITION_SHOOT = 0.35;
 	public static double SHOOTER_GATE_SERVO_RIGHT_POSITION_BLOCK = 0.475;
 	public static double SHOOTER_GATE_SERVO_RIGHT_POSITION_OUTTAKE = 1;
 
