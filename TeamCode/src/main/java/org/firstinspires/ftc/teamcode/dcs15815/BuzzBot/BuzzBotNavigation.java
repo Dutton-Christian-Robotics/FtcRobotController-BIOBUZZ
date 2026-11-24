@@ -175,10 +175,10 @@ public class BuzzBotNavigation extends DefenderBotSystem {
 	       Y: + = left, - = right
             H: + = ccw, - = cw
          ---------------------------------------------------------------------------------------- */
-        bot.telemetry.addData("x out", xOutput);
-        bot.telemetry.addData("y out", yOutput);
-        bot.telemetry.addData("h out", hOutput);
-        bot.telemetry.addData("p", power);
+//        bot.telemetry.addData("x out", xOutput);
+//        bot.telemetry.addData("y out", yOutput);
+//        bot.telemetry.addData("h out", hOutput);
+//        bot.telemetry.addData("p", power);
 
 		if (!isAtTarget) {
 			drivetrain.driveWithPinpointValues(xOutput, yOutput, hOutput, power);
@@ -207,17 +207,17 @@ public class BuzzBotNavigation extends DefenderBotSystem {
 	}
 
 	private double calculatePID(Pose2D currentPosition, Pose2D targetPosition, Direction direction){
-		if (direction == Direction.x){
+		if (direction == Direction.x) {
 			double xError = targetPosition.getX(MM) - currentPosition.getX(MM);
 			totalError += xError;
-			return xPID.calculateAxisPID(xError, pGain, dGain, accel,PIDTimer.seconds());
+			return xPID.calculateAxisPID(xError, pGain, dGain, accel, PIDTimer.seconds());
 		}
-		if (direction == Direction.y){
+		if (direction == Direction.y) {
 			double yError = targetPosition.getY(MM) - currentPosition.getY(MM);
 			totalError += yError;
 			return yPID.calculateAxisPID(yError, pGain, dGain, accel, PIDTimer.seconds());
 		}
-		if (direction == Direction.h){
+		if (direction == Direction.h) {
 			double hError = targetPosition.getHeading(AngleUnit.RADIANS) - currentPosition.getHeading(AngleUnit.RADIANS);
 			totalError += hError;
 			return hPID.calculateAxisPID(hError, yawPGain, yawDGain, yawAccel, PIDTimer.seconds());
@@ -272,7 +272,7 @@ class PIDLoop{
 
 	private double errorR;
 
-	public double calculateAxisPID(double error, double pGain, double dGain, double accel, double currentTime){
+	public double calculateAxisPID(double error, double pGain, double dGain, double accel, double currentTime) {
 		double p = error * pGain;
 		double cycleTime = currentTime - previousTime;
 		double d = dGain * (previousError - error) / (cycleTime);
@@ -280,13 +280,13 @@ class PIDLoop{
 		double dV = cycleTime * accel;
 
 		double max = Math.abs(output);
-		if(max > 1.0){
+		if (max > 1.0) {
 			output /= max;
 		}
 
-		if((output - previousOutput) > dV){
+		if ((output - previousOutput) > dV) {
 			output = previousOutput + dV;
-		} else if ((output - previousOutput) < -dV){
+		} else if ((output - previousOutput) < -dV) {
 			output = previousOutput - dV;
 		}
 

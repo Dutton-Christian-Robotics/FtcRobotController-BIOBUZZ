@@ -23,10 +23,16 @@ public class PinpointTestOpMode extends LinearOpMode {
     @Override
     public void runOpMode() {
 
+        telemetry.addData("Status", "calibrating");
+        telemetry.update();
 
         bot = new BuzzBot(hardwareMap, BuzzBotConfiguration.class, telemetry);
-        sleep(1000);
-        bot.navigation.setPosition(new DefenderBotPosition(69, -12, 0));
+        sleep(3000);
+        bot.navigation.setPosition(new DefenderBotPosition(95, -18, 0));
+//        bot.navigation.setPosition(new DefenderBotPosition(0, 0, 0));
+
+        telemetry.addData("Status", "READY");
+        telemetry.update();
 
         while (!isStarted() && !opModeIsActive()) {
             displayTelemetry();
@@ -38,17 +44,67 @@ public class PinpointTestOpMode extends LinearOpMode {
 
 //            if (gamepad1.xWasPressed()) {
 
-            if (gamepad1.yWasPressed()) {
+            if (gamepad1.aWasPressed()) {
                 boolean done = false;
                 do {
-                    done = bot.navigation.driveToFromCurrent(new DefenderBotPosition(45, -12, 0));
-
+                    done = bot.navigation.driveToFromCurrent(new DefenderBotPosition(-30, -42, 0));
+                    if (gamepad1.aWasPressed()) {
+                        done = true;
+                        bot.drivetrain.stopDriving();
+                    }
 //                    displayTelemetry();
 
-                } while (!done);
+                } while (!done && !isStopRequested());
 
 
             }
+
+            if (gamepad1.bWasPressed()) {
+                boolean done = false;
+                do {
+                    done = bot.navigation.driveToFromCurrent(new DefenderBotPosition(0, 0, 90));
+                    if (gamepad1.aWasPressed()) {
+                        done = true;
+                        bot.drivetrain.stopDriving();
+                    }
+//                    displayTelemetry();
+
+                } while (!done && !isStopRequested());
+
+
+            }
+
+            if (gamepad1.xWasPressed()) {
+                boolean done = false;
+                do {
+                    done = bot.navigation.driveToFromCurrent(new DefenderBotPosition(-24, 0, 0));
+                    if (gamepad1.aWasPressed()) {
+                        done = true;
+                        bot.drivetrain.stopDriving();
+                    }
+
+//                    displayTelemetry();
+
+                } while (!done && !isStopRequested());
+
+
+            }
+            if (gamepad1.yWasPressed()) {
+                boolean done = false;
+                do {
+                    done = bot.navigation.driveToFromCurrent(new DefenderBotPosition(0, 24, 0));
+                    if (gamepad1.aWasPressed()) {
+                        done = true;
+                        bot.drivetrain.stopDriving();
+                    }
+
+//                    displayTelemetry();
+
+                } while (!done && !isStopRequested());
+
+
+            }
+
 //
 //        while (!bot.navigation.driveToFromCurrent(TARGET_1.asPose2D(), 0.5, 0) && opModeIsActive()) {
 //            telemetry.addData("x", bot.navigation.getPosition().getX(DistanceUnit.INCH));

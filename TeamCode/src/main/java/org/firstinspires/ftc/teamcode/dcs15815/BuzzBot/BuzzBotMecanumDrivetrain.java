@@ -25,11 +25,16 @@ public class BuzzBotMecanumDrivetrain extends DefenderBotDrivetrain {
 		backRight = hm.get(DcMotorEx.class, BuzzBotConfiguration.DRIVETRAIN_MOTOR_BACK_RIGHT_NAME);
 
 
+		backLeft.setDirection(BuzzBotConfiguration.DRIVETRAIN_MOTOR_BACK_LEFT_DIRECTION);
+		frontLeft.setDirection(BuzzBotConfiguration.DRIVETRAIN_MOTOR_FRONT_LEFT_DIRECTION);
+		frontRight.setDirection(BuzzBotConfiguration.DRIVETRAIN_MOTOR_FRONT_RIGHT_DIRECTION);
+		backRight.setDirection(BuzzBotConfiguration.DRIVETRAIN_MOTOR_BACK_RIGHT_DIRECTION);
 
-		backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-		frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-		frontRight.setDirection(DcMotorSimple.Direction.FORWARD);
-		backRight.setDirection(DcMotorSimple.Direction.FORWARD);
+
+//		backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+//		frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+//		frontRight.setDirection(DcMotorSimple.Direction.FORWARD);
+//		backRight.setDirection(DcMotorSimple.Direction.FORWARD);
 
 //		frontLeft.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 //		frontRight.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
@@ -114,6 +119,7 @@ public class BuzzBotMecanumDrivetrain extends DefenderBotDrivetrain {
 
 	public void driveWithPinpointValues(double x, double y, double h, double p) {
 
+
 		if (allowPowerBoost && (drivingTimer == null)) {
 			drivingTimer = new ElapsedTime();
 			powerBoost = 0;
@@ -125,16 +131,33 @@ public class BuzzBotMecanumDrivetrain extends DefenderBotDrivetrain {
 		y *= p;
 		h *= p;
 
-//		bot.telemetry.addData("x out", x);
-//		bot.telemetry.addData("y out", y);
-//		bot.telemetry.addData("h out", h);
-//		bot.telemetry.addData("p", p);
+//		x *= -1;
+//		y *= -1;
+//		h *= -1;
+
+		bot.telemetry.addData("x out", x);
+		bot.telemetry.addData("y out", y);
+		bot.telemetry.addData("h out", h);
+		bot.telemetry.addData("p", p);
 
 
+//		double backLeftPower = forward - strafe + rotate;
+//		double frontLeftPower = forward + strafe + rotate;
+//		double frontRightPower = forward - strafe - rotate;
+//		double backRightPower = forward + strafe - rotate;
+
+
+//		double backLeftOutput = x - y + h;
+//		double frontLeftOutput = x + y + h;
+//		double frontRightOutput = x - y - h;
+//		double backRightOutput = x + y - h;
+
+		// before fixes
 		double backLeftOutput = x + -y - h;
 		double frontLeftOutput = x - -y - h;
 		double frontRightOutput = x + -y + h;
 		double backRightOutput = x - -y + h;
+
 
 		double max = Math.max(Math.abs(frontLeftOutput), Math.abs(frontRightOutput));
 		max = Math.max(max, Math.abs(backLeftOutput));
@@ -153,10 +176,10 @@ public class BuzzBotMecanumDrivetrain extends DefenderBotDrivetrain {
 		}
 
 
-//		bot.telemetry.addData("BL", backLeftOutput);
-//		bot.telemetry.addData("FL", frontLeftOutput);
-//		bot.telemetry.addData("FR", frontRightOutput);
-//		bot.telemetry.addData("BR", backRightOutput);
+		bot.telemetry.addData("BL", backLeftOutput);
+		bot.telemetry.addData("FL", frontLeftOutput);
+		bot.telemetry.addData("FR", frontRightOutput);
+		bot.telemetry.addData("BR", backRightOutput);
 //		bot.telemetry.addData("boost", powerBoost);
 
 		setPower(backLeftOutput, frontLeftOutput, frontRightOutput, backRightOutput);
