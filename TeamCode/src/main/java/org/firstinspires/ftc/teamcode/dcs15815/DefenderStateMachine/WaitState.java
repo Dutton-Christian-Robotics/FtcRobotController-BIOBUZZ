@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class WaitState extends DefenderState {
 	private long waitTime;
 	private ElapsedTime timer;
+	private boolean timerHasBeenReset = false;
+
 
 	WaitState(long ms) {
 		super();
@@ -20,6 +22,11 @@ public class WaitState extends DefenderState {
 
 	@Override
 	public void run() {
+		if (!timerHasBeenReset) {
+			timer.reset();
+			timerHasBeenReset = true;
+		}
+
 		if (timer.milliseconds() >= waitTime) {
 			isFinished = true;
 		}

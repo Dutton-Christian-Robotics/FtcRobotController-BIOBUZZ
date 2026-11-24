@@ -89,6 +89,10 @@ public class DriveToPositionState extends DefenderState {
 		return new DriveToPositionState(configName, t);
 	}
 
+	public static DriveToPositionState where(DefenderBotPosition pos, long t) {
+		return new DriveToPositionState(pos, t);
+	}
+
 	public DriveToPositionState setPowerFactor(double n) {
 		powerFactor = n;
 		return this;

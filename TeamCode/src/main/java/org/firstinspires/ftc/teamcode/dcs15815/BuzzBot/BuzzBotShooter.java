@@ -68,10 +68,20 @@ public class BuzzBotShooter extends DefenderBotSystem  {
         turnOn();
         sleep(BuzzBotConfiguration.SHOOTER_TIME_AFTER_MOTOR_START);
         turnOnLift();
+        moveGateToShootPosition();
+        startAgitatorCycle();
     }
     public void endShooting() {
+        stopAgitatorCycle();
+        moveGateToBlockPosition();
         turnOff();
         turnOffLift();
+    }
+
+    public void shootAutonomously() {
+        beginShooting();
+        sleep(BuzzBotConfiguration.SHOOTER_SHOOT_TIME_AUTONOMOUS);
+        endShooting();
     }
 
     public void moveAgitatorToRestPosition() {

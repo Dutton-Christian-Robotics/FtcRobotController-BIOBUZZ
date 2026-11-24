@@ -40,7 +40,6 @@ public class BuzzBotEffects extends DefenderBotSystem {
 	public void solidBlue() {
 		setPattern(RevBlinkinLedDriver.BlinkinPattern.BLUE);
 	}
-
 	public void solidRed() {
 		setPattern(RevBlinkinLedDriver.BlinkinPattern.RED);
 	}
@@ -48,6 +47,9 @@ public class BuzzBotEffects extends DefenderBotSystem {
 
 	public void scanBlue() {
 		setPattern(RevBlinkinLedDriver.BlinkinPattern.SHOT_BLUE);
+	}
+	public void scanRed() {
+		setPattern(RevBlinkinLedDriver.BlinkinPattern.SHOT_RED);
 	}
 
 	public void black() {
@@ -66,9 +68,6 @@ public class BuzzBotEffects extends DefenderBotSystem {
 		setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
 	}
 
-	public void scanRed() {
-		setPattern(RevBlinkinLedDriver.BlinkinPattern.SHOT_RED);
-	}
 
 	public void twinklesGreen() {
 		setPattern(RevBlinkinLedDriver.BlinkinPattern.TWINKLES_FOREST_PALETTE);
@@ -77,7 +76,6 @@ public class BuzzBotEffects extends DefenderBotSystem {
 	public void heartbeatBlue() {
 		setPattern(RevBlinkinLedDriver.BlinkinPattern.HEARTBEAT_BLUE);
 	}
-
 	public void heartbeatRed() {
 		setPattern(RevBlinkinLedDriver.BlinkinPattern.HEARTBEAT_RED);
 	}
@@ -85,10 +83,21 @@ public class BuzzBotEffects extends DefenderBotSystem {
 		setPattern(RevBlinkinLedDriver.BlinkinPattern.HEARTBEAT_GRAY);
 	}
 
+	public void breathBlue() {
+		setPattern(RevBlinkinLedDriver.BlinkinPattern.BREATH_BLUE);
+	}
+	public void breathRed() {
+		setPattern(RevBlinkinLedDriver.BlinkinPattern.BREATH_RED);
+	}
+	public void breathGray() {
+		setPattern(RevBlinkinLedDriver.BlinkinPattern.BREATH_GRAY);
+	}
+
+	public void strobeRed() { setPattern(RevBlinkinLedDriver.BlinkinPattern.STROBE_RED);}
+	public void strobeBlue() { setPattern(RevBlinkinLedDriver.BlinkinPattern.STROBE_BLUE);}
 	public void strobeGold() {
 		setPattern(RevBlinkinLedDriver.BlinkinPattern.STROBE_GOLD);
 	}
-
 	public void strobeWhite() {
 		setPattern(RevBlinkinLedDriver.BlinkinPattern.STROBE_WHITE);
 	}

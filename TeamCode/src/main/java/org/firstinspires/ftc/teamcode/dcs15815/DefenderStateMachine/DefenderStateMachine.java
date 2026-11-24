@@ -14,6 +14,10 @@ public class DefenderStateMachine {
 	public boolean isDebugging = false;
 
 
+	public DefenderStateMachine() {
+		isFinished = false;
+	}
+
 	public DefenderStateMachine(DefenderBot b) {
 //		eventSources = new ArrayList<>();
 		bot = b;
@@ -21,9 +25,23 @@ public class DefenderStateMachine {
 //		currentEvents = new ArrayList<>();
 	}
 
+	public DefenderStateMachine(DefenderBot b, BuzzBotAutonomousOpMode om) {
+//		eventSources = new ArrayList<>();
+		bot = b;
+		opMode = om;
+		isFinished = false;
+//		currentEvents = new ArrayList<>();
+	}
+
+
 	public DefenderState startWithState(DefenderState s) {
 		setState(s);
 		return s;
+	}
+
+	public DefenderStateMachine setBot(DefenderBot b) {
+		bot = b;
+		return this;
 	}
 
 	public DefenderStateMachine setOpMode(BuzzBotAutonomousOpMode om) {
@@ -83,7 +101,8 @@ public class DefenderStateMachine {
 	public void run() {
 //		ArrayList<DefenderEvent> events = new ArrayList<>();
 
-		if (isFinished) {
+
+		if (isFinished || !opMode.opModeIsActive()) {
 			return;
 		}
 		if (currentState == null) {
@@ -99,6 +118,7 @@ public class DefenderStateMachine {
 //		}
 //		currentEvents.clear();
 //		currentEvents.addAll(events);
+		currentState.setIsStarted(true);
 		currentState.run();
 
 		if (currentState.isFinished()) {
