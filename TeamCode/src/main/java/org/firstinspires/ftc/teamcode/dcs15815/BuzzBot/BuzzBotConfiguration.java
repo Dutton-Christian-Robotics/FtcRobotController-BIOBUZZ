@@ -154,7 +154,7 @@ public class BuzzBotConfiguration {
 /* PRESETS -------------------------------------------------------- */
 
 /* ALL AUTONOMOUS -------------------------------------------------------- */
-	public static double DRIVETRAIN_POWER_MAX_AUTONOMOUS = 0.25;
+	public static double DRIVETRAIN_POWER_MAX_AUTONOMOUS = 0.6;
 	public static long SHOOTER_SHOOT_TIME_AUTONOMOUS = 3000;
 	public static long VISION_WAIT_FOR_READY_TIME_AUTONOMOUS = 3000;
 	public static long VISION_WAIT_FOR_HIVE_TIP_TIME_AUTONOMOUS = 10000;

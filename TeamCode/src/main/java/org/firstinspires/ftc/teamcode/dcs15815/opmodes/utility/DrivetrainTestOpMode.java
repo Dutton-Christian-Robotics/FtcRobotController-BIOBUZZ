@@ -9,6 +9,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBot;
+import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBotConfiguration;
+
 @Disabled
 @Utility(name = "Drivetrain Test", description="Test")
 public class DrivetrainTestOpMode extends LinearOpMode {
@@ -17,22 +20,30 @@ public class DrivetrainTestOpMode extends LinearOpMode {
 	@Override
 	public void runOpMode() {
 
-		backLeft = (DcMotorEx) hardwareMap.dcMotor.get("drivetrain_motor_back_left");
-		frontLeft = (DcMotorEx) hardwareMap.dcMotor.get("drivetrain_motor_front_left");
-		frontRight = (DcMotorEx) hardwareMap.dcMotor.get("drivetrain_motor_front_right");
-		backRight = (DcMotorEx) hardwareMap.dcMotor.get("drivetrain_motor_back_right");
+		BuzzBot bot = new BuzzBot(hardwareMap, BuzzBotConfiguration.class, telemetry);
 
-		frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
-		backRight.setDirection(DcMotorSimple.Direction.REVERSE);
+
+//		backLeft = (DcMotorEx) hardwareMap.dcMotor.get("drivetrain_motor_back_left");
+//		frontLeft = (DcMotorEx) hardwareMap.dcMotor.get("drivetrain_motor_front_left");
+//		frontRight = (DcMotorEx) hardwareMap.dcMotor.get("drivetrain_motor_front_right");
+//		backRight = (DcMotorEx) hardwareMap.dcMotor.get("drivetrain_motor_back_right");
+//
+//		frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
+//		backRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
 		waitForStart();
 
-		backLeft.setPower(1);
-		frontLeft.setPower(1);
-		frontRight.setPower(1);
-		backRight.setPower(1);
+		bot.drivetrain.backLeft.setPower(-0.25);
+		bot.drivetrain.frontLeft.setPower(-0.25);
+		bot.drivetrain.frontRight.setPower(-0.25);
+		bot.drivetrain.backRight.setPower(-0.25);
 
-		while(true) {
+//		backLeft.setPower(1);
+//		frontLeft.setPower(1);
+//		frontRight.setPower(1);
+//		backRight.setPower(1);
+
+		while(!isStopRequested()) {
 
 		}
 //		sleep(5000);
