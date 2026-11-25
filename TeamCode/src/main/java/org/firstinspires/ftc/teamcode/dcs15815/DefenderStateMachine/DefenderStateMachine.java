@@ -62,7 +62,7 @@ public class DefenderStateMachine {
 
 	public DefenderStateMachine setStartingPosition(DefenderBotPosition position) {
 		if (bot != null) {
-			SetCurrentPositionState startingPositionState = SetCurrentPositionState.where(position);
+			initStates.add(SetCurrentPositionState.where(position));
 		} else {
 			throw new RuntimeException("State machine has no bot. Cannot set starting position without a bot.");
 		}
