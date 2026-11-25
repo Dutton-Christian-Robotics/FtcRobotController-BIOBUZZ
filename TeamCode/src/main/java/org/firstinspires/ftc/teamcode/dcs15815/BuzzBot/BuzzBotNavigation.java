@@ -97,6 +97,16 @@ public class BuzzBotNavigation extends DefenderBotSystem {
 		yawTolerance = unit.toRadians(tolerance);
 	}
 
+	public boolean isPinpointReady() {
+		return getPinpointStatus() == GoBildaPinpointDriver.DeviceStatus.READY;
+	}
+
+	public GoBildaPinpointDriver.DeviceStatus getPinpointStatus() {
+		return pinpoint.getDeviceStatus();
+	}
+
+
+
 	public Pose2D getPosition() {
 		return pinpoint.getPosition();
 	}
