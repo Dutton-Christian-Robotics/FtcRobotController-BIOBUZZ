@@ -2,7 +2,11 @@ package org.firstinspires.ftc.teamcode.dcs15815.DefenderStateMachine;
 
 
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBot;
+import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBotPosition;
 import org.firstinspires.ftc.teamcode.dcs15815.opmodes.autonomous.BuzzBotAutonomousOpMode;
+import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
+
+import java.util.ArrayList;
 
 
 public class DefenderStateMachine {
@@ -10,18 +14,23 @@ public class DefenderStateMachine {
 	private DefenderState currentState;
 	public DefenderBot bot;
 	private boolean isFinished = false;
+	private boolean isDoneWithInit = false;
 	public BuzzBotAutonomousOpMode opMode = null;
 	public boolean isDebugging = false;
+
+	public ArrayList<DefenderState> initStates;
 
 
 	public DefenderStateMachine() {
 		isFinished = false;
+		initStates = new ArrayList<DefenderState>();
 	}
 
 	public DefenderStateMachine(DefenderBot b) {
 //		eventSources = new ArrayList<>();
 		bot = b;
 		isFinished = false;
+		initStates = new ArrayList<DefenderState>();
 //		currentEvents = new ArrayList<>();
 	}
 
@@ -30,6 +39,7 @@ public class DefenderStateMachine {
 		bot = b;
 		opMode = om;
 		isFinished = false;
+		initStates = new ArrayList<DefenderState>();
 //		currentEvents = new ArrayList<>();
 	}
 
@@ -47,6 +57,15 @@ public class DefenderStateMachine {
 	public DefenderStateMachine setOpMode(BuzzBotAutonomousOpMode om) {
 		this.opMode = om;
 		this.bot = opMode.bot;
+		return this;
+	}
+
+	public DefenderStateMachine setStartingPosition(DefenderBotPosition position) {
+		if (bot != null) {
+			initStates.add(SetCurrentPositionState.where(position));
+		} else {
+			throw new RuntimeException("State machine has no bot. Cannot set starting position without a bot.");
+		}
 		return this;
 	}
 
@@ -101,6 +120,14 @@ public class DefenderStateMachine {
 	public void run() {
 //		ArrayList<DefenderEvent> events = new ArrayList<>();
 
+		if (!isDoneWithInit) {
+			// All states to run during init should be single-run = no loops; we're not built to loop through them here
+			for (DefenderState s : initStates) {
+				s.setIsStarted(true);
+				s.run();
+			}
+			isDoneWithInit = true;
+		}
 
 		if (isFinished || !opMode.opModeIsActive()) {
 			return;

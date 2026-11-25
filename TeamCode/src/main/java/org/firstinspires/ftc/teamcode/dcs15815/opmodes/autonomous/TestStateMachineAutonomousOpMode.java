@@ -5,8 +5,10 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.dcs15815.BuzzBot.BuzzBotShootState;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBotMotion;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderBot.DefenderBotPosition;
+import org.firstinspires.ftc.teamcode.dcs15815.DefenderFramework.DefenderUtilities.DefenderAlliance;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderStateMachine.DriveToPositionState;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderStateMachine.RunOnceState;
+import org.firstinspires.ftc.teamcode.dcs15815.DefenderStateMachine.SetCurrentPositionState;
 import org.firstinspires.ftc.teamcode.dcs15815.DefenderStateMachine.TimedDriveState;
 
 @Autonomous(name = "UP Test: Park", group = "Up", preselectTeleOp = "Driver Controlled")
@@ -21,13 +23,22 @@ public class TestStateMachineAutonomousOpMode extends BuzzBotStateMachineAutonom
 //            .setDebugging(true)
             .setBot(bot)
             .setOpMode(this)
+
+// This is the cleanest way to set a starting position
+            .setStartingPosition(new DefenderBotPosition(95, -18, 0))
             .startWithState(
-                RunOnceState
-                    .make(() -> {
-                        bot.navigation.setPosition(new DefenderBotPosition(95, -18, 0));
-//                                bot.shooter.changeShooterPower(DecodeConfiguration.BLUE4_SHOOTER_MOTOR_POWER);
-                    })
+
+// Here's how to use a SetCurrentPositionState
+                SetCurrentPositionState
+                    .where(new DefenderBotPosition(95, -18, 0))
                     .setLabel("START")
+
+// Here's how to use a RunOnceState to set current position
+//                RunOnceState
+//                    .make(() -> {
+//                        bot.navigation.setPosition(new DefenderBotPosition(95, -18, 0));
+//                    })
+//                    .setLabel("START")
             ).andThen(
                 BuzzBotShootState
                     .make()
